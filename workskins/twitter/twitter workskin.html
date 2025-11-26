@@ -1,0 +1,584 @@
+<style>
+/* ================== COLOR VARIABLES ================== */
+.tw-light {
+    --tw-bg: #ffffff;
+    --tw-text: #0f1419;
+    --tw-border: #e6e6e6;
+    --tw-muted: #536471;
+    --tw-quote-bg: #f7f9f9;
+    --tw-btn-bg: #1da1f2;
+    --tw-btn-text: #ffffff;
+    --tw-play-bg: rgba(0,0,0,0.6);
+    --icon-reply: url("https://i.imgur.com/Ffdb4ZQ.png");
+    --icon-rt: url("https://i.imgur.com/78rFZ8s.png");
+    --icon-fav: url("https://i.imgur.com/Vwo5NSk.png");
+    --icon-bookmark: url("https://i.imgur.com/ZVKFAUV.png");
+    --icon-view: url("https://i.imgur.com/RKbfk3i.png");
+}
+
+.tw-dark {
+    --tw-bg: #15202b;
+    --tw-text: #ffffff;
+    --tw-border: #38444d;
+    --tw-muted: #8899a6;
+    --tw-quote-bg: #192734;
+    --tw-btn-bg: #0d8ddb;
+    --tw-btn-text: #ffffff;
+    --tw-play-bg: rgba(255,255,255,0.6);
+    --icon-reply: url("https://i.imgur.com/XjyP9ju.png");
+    --icon-rt: url("https://i.imgur.com/UBv3p4E.png");
+    --icon-fav: url("https://i.imgur.com/XuQwkIB.png");
+    --icon-bookmark: url("https://i.imgur.com/VObqTOV.png");
+    --icon-view: url("https://i.imgur.com/1y5OGw7.png");
+}
+
+/* ================== CONTAINER ================== */
+.tw-container {
+    background: var(--tw-bg);
+    color: var(--tw-text);
+    font-family: "Segoe UI", Roboto, sans-serif;
+    padding: 12px;
+    border-radius: 12px;
+    max-width: 600px;
+    margin: auto;
+}
+
+/* ================== HEADERS & AVATARS ================== */
+.tw-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+.tw-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.tw-name[data-verified="true"]::after {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;
+    margin-left: 4px;
+    background-image: url("https://i.imgur.com/TU1WVte.png");
+}
+.tw-handle { font-size: 0.85em; color: var(--tw-muted); }
+
+/* ================== CONTENT ================== */
+.tw-content { margin-bottom: 8px; line-height: 1.4; padding-top: 0.6em; padding-bottom: 0.6em; }
+.tw-images img, .tw-video img { width: 100%; border-radius: 12px; object-fit: cover; }
+
+/* ================== IMAGE GRIDS ================== */
+.tw-images.tw-2 img { width: 49%; margin-right: 2%; }
+.tw-images.tw-2 img:last-child { margin-right: 0; }
+.tw-images.tw-3 img { width: 32%; margin-right: 2%; }
+.tw-images.tw-3 img:last-child { margin-right: 0; }
+
+/* ================== VIDEO/GIF ================== */
+.tw-video {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.tw-video img { width: 100%; display: block; border-radius: 12px; }
+.tw-play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  background-color: var(--tw-play-bg);
+  clip-path: polygon(25% 20%, 25% 80%, 75% 50%);
+  cursor: pointer;
+}
+
+/* ================== ACTION ICONS ================== */
+.tw-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    margin-top: 8px;
+    padding: 0.8em;
+}
+.tw-action {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+.tw-action .icon {
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.tw-action .icon.reply { background-image: var(--icon-reply); }
+.tw-action .icon.retweet { background-image: var(--icon-rt); }
+.tw-action .icon.like { background-image: var(--icon-fav); }
+.tw-action .icon.bookmark { background-image: var(--icon-bookmark); }
+.tw-action .icon.view { background-image: var(--icon-view); }
+.tw-action .icon.retweet.retweeted { background-image: url("https://i.imgur.com/fvU9m4D.png"); }
+.tw-action .icon.like.liked { background-image: url("https://i.imgur.com/k31Sgul.png"); }
+.tw-action .icon.bookmark.bookmarked { background-image: url("https://i.imgur.com/z2Mz3Dg.png"); }
+.tw-action .count { font-size: 0.85em; color: var(--tw-muted); }
+
+/* ================== META & DIVIDERS ================== */
+.tw-meta { font-size: 0.8em; color: var(--tw-muted); margin-top: 4px; }
+.tw-divider { border-top: 1px solid var(--tw-border); margin: 12px 0; }
+
+/* ================== QUOTE TWEETS ================== */
+.tw-quote { border: 1px solid var(--tw-border); border-radius: 12px; background: var(--tw-quote-bg); padding: 8px; margin-top: 8px; }
+
+/* ================== REPLIES ================== */
+.tw-reply-wrapper { margin-top: 12px; display: flex;
+    flex-direction: column;
+    gap: 16px;}
+.tw-reply {
+    margin-top: 8px;
+    position: relative;
+	
+	
+}
+
+.tw-reply .tw-actions {
+	margin-left: 2.7em;
+}
+.tw-reply .tw-header { gap: 6px; align-items: center; }
+.tw-reply .tw-avatar { width: 36px; height: 36px; flex-shrink: 0; }
+.tw-reply .tw-content { margin-top: 4px; margin-bottom: 6px; line-height: 1.4; }
+.tw-reply .tw-actions { display: flex; gap: 16px; margin-bottom: 4px; padding: 0; }
+
+.tw-reply .tw-content,
+.tw-reply .tw-actions,
+.tw-reply .tw-meta {
+    padding-left: 56px; /* indent text only */
+}
+
+.tw-reply .tw-actions {
+	padding-right: 56px;
+}
+
+/* ================== NESTED REPLIES ================== */
+.tw-nested-reply-wrapper {
+  margin-left: 56px; /* indent all nested replies */
+  position: relative;
+  display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+
+/* Ensure avatar stays on top */
+.tw-nested-reply .tw-avatar {
+  position: relative;
+  z-index: 2;
+}
+
+.tw-reply-wrapper > .tw-reply:last-child {
+    /* styles for the last reply */
+    margin-bottom: 10px; 
+}
+
+/* ================== REPLY SECTION ================== */
+.tw-reply-section { display: flex; gap: 8px; margin-top: 12px; align-items: flex-start; }
+.tw-reply-section .tw-avatar { width: 40px; height: 40px; }
+.tw-reply-box {
+    flex: 1; min-height: 60px; padding: 6px 10px;
+    border: 1px solid var(--tw-border);
+    border-radius: 12px;
+    background: var(--tw-bg);
+    color: var(--tw-text);
+    font-family: inherit;
+    font-size: 0.9em;
+    resize: none;
+}
+.tw-reply-box::placeholder { color: var(--tw-muted); }
+.tw-reply-submit {
+    background-color: var(--tw-btn-bg);
+    color: var(--tw-btn-text);
+    border: 1px solid transparent;
+    border-radius: 16px;
+    padding: 6px 12px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.tw-reply-submit:hover { filter: brightness(0.9); }
+
+</style>
+
+<div class="tw-container tw-dark">
+
+  <!-- Header -->
+  <div class="tw-header">
+    <img src="MAIN_AVATAR" class="tw-avatar">
+    <div>
+      <div class="tw-name" data-verified="true">Main Character</div>
+      <div class="tw-handle">@maincharacter</div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="tw-content">
+    This is a complete tweet with all features: media grids, GIF/video, quote tweets, and replies.
+  </div>
+
+  <!-- Media Grid -->
+  <div class="tw-images tw-3">
+    <img src="IMG_1">
+    <img src="IMG_2">
+    <img src="IMG_3">
+  </div>
+
+  <!-- Actions -->
+  <div class="tw-actions">
+    <div class="tw-action">
+      <span class="icon reply"></span>
+      <span class="count">114</span>
+    </div>
+    <div class="tw-action">
+      <span class="icon retweet retweeted"></span>
+      <span class="count">621</span>
+    </div>
+    <div class="tw-action">
+      <span class="icon like liked"></span>
+      <span class="count">3984</span>
+    </div>
+    <div class="tw-action">
+      <span class="icon bookmark bookmarked"></span>
+    </div>
+  </div>
+
+  <div class="tw-meta">11:42 AM · Feb 12 · 98K Views</div>
+  <div class="tw-divider"></div>
+
+  <!-- Reply Section -->
+  <div class="tw-reply-section">
+    <img src="YOUR_AVATAR" class="tw-avatar">
+    <textarea placeholder="Tweet your reply..." class="tw-reply-box"></textarea>
+    <button class="tw-reply-submit">Reply</button>
+  </div>
+
+  <div class="tw-divider"></div>
+
+ <div class="tw-reply-wrapper">
+
+  <!-- Parent Reply -->
+  <div class="tw-reply">
+    <div class="tw-header">
+      <img src="R1_AVATAR" class="tw-avatar">
+      <div>
+        <div class="tw-name">@reply1</div>
+        <div class="tw-handle">@reply1</div>
+      </div>
+    </div>
+
+    <div class="tw-content">Parent reply content.</div>
+<div class="tw-actions">
+          <div class="tw-action">
+            <span class="icon reply"></span>
+            <span class="count">0</span>
+          </div>
+          <div class="tw-action">
+            <span class="icon retweet"></span>
+            <span class="count">0</span>
+          </div>
+          <div class="tw-action">
+            <span class="icon like"></span>
+            <span class="count">0</span>
+          </div>
+		  <div class="tw-action">
+			<span class="icon bookmark"></span>
+		  </div>
+		  <div class="tw-action">
+			<span class="icon view"></span>
+			<span class="count">0</span>
+		  </div>
+        </div>
+
+  </div>
+  <div class="tw-nested-reply-wrapper">
+  <!-- Nested Reply 1 -->
+    <div class="tw-nested-reply">
+      <div class="tw-header">
+        <img src="R1_1_AVATAR" class="tw-avatar">
+        <div>
+          <div class="tw-name">@nested1</div>
+          <div class="tw-handle">@nested1</div>
+        </div>
+      </div>
+      <div class="tw-content">Nested reply content.</div>
+	  <div class="tw-actions">
+          <div class="tw-action">
+            <span class="icon reply"></span>
+            <span class="count">0</span>
+          </div>
+          <div class="tw-action">
+            <span class="icon retweet"></span>
+            <span class="count">0</span>
+          </div>
+          <div class="tw-action">
+            <span class="icon like"></span>
+            <span class="count">0</span>
+          </div>
+		  <div class="tw-action">
+			<span class="icon bookmark"></span>
+		  </div>
+		  <div class="tw-action">
+			<span class="icon view"></span>
+			<span class="count">0</span>
+		  </div>
+        </div>
+    </div>
+
+    <!-- Nested Reply 2 -->
+    <div class="tw-nested-reply">
+      <div class="tw-header">
+        <img src="R1_2_AVATAR" class="tw-avatar">
+        <div>
+          <div class="tw-name">@nested2</div>
+          <div class="tw-handle">@nested2</div>
+        </div>
+      </div>
+      <div class="tw-content">Another nested reply.</div>
+	  <div class="tw-actions">
+          <div class="tw-action">
+            <span class="icon reply"></span>
+            <span class="count">0</span>
+          </div>
+          <div class="tw-action">
+            <span class="icon retweet"></span>
+            <span class="count">0</span>
+          </div>
+          <div class="tw-action">
+            <span class="icon like"></span>
+            <span class="count">0</span>
+          </div>
+		  <div class="tw-action">
+			<span class="icon bookmark"></span>
+		  </div>
+		  <div class="tw-action">
+			<span class="icon view"></span>
+			<span class="count">0</span>
+		  </div>
+        </div>
+    </div>
+	</div>
+  <div class="tw-divider"></div>
+  <!-- Another parent reply -->
+  <div class="tw-reply">
+    <div class="tw-header">
+      <img src="R2_AVATAR" class="tw-avatar">
+      <div>
+        <div class="tw-name">@reply2</div>
+        <div class="tw-handle">@reply2</div>
+      </div>
+    </div>
+    <div class="tw-content">Another parent reply.</div>
+	<div class="tw-actions">
+          <div class="tw-action">
+            <span class="icon reply"></span>
+            <span class="count">0</span>
+          </div>
+          <div class="tw-action">
+            <span class="icon retweet"></span>
+            <span class="count">0</span>
+          </div>
+          <div class="tw-action">
+            <span class="icon like"></span>
+            <span class="count">0</span>
+          </div>
+		  <div class="tw-action">
+			<span class="icon bookmark"></span>
+		  </div>
+		  <div class="tw-action">
+			<span class="icon view"></span>
+			<span class="count">0</span>
+		  </div>
+        </div>
+  </div>
+
+</div>
+
+
+</div>
+</br></br></br>
+<div class="tw-container tw-dark">
+
+  <!-- Header -->
+  <div class="tw-header">
+    <img src="MAIN_AVATAR" class="tw-avatar">
+    <div>
+      <div class="tw-name" data-verified="true">Main Character</div>
+      <div class="tw-handle">@maincharacter</div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="tw-content">
+    This is a complete tweet with all features: media grids, GIF/video, quote tweets, and replies.
+  </div>
+  
+	<!-- GIF/video -->
+  <div class="tw-video">
+    <img src="VIDEO_THUMBNAIL">
+	<div class="tw-play-button"></div>
+  </div>
+  <div class="tw-actions">
+	  <div class="tw-action">
+		<span class="icon reply"></span>
+		<span class="count">0</span>
+	  </div>
+	  <div class="tw-action">
+		<span class="icon retweet"></span>
+		<span class="count">0</span>
+	  </div>
+	  <div class="tw-action">
+		<span class="icon like"></span>
+		<span class="count">0</span>
+	  </div>
+	  <div class="tw-action">
+		<span class="icon bookmark"></span>
+	  </div>
+	</div>
+	<div class="tw-meta">12:12 PM · Feb 12</div>
+  
+</div>
+</br></br></br>
+<div class="tw-container tw-dark">
+  <!-- Quote Tweet -->
+  <div class="tw-quote">
+    <div class="tw-header">
+      <img src="Q1_AVATAR" class="tw-avatar">
+      <div>
+        <div class="tw-name" data-verified="true">Quoted User</div>
+        <div class="tw-handle">@quoted1</div>
+      </div>
+    </div>
+    <div class="tw-content">This is the first quote tweet.</div>
+    <div class="tw-images tw-2">
+      <img src="Q1_IMG_1">
+      <img src="Q1_IMG_2">
+    </div>
+
+    <!-- Nested Quote -->
+    <div class="tw-quote">
+      <div class="tw-header">
+        <img src="Q2_AVATAR" class="tw-avatar">
+        <div>
+          <div class="tw-name">@quoted2</div>
+          <div class="tw-handle">@quoted2</div>
+        </div>
+      </div>
+      <div class="tw-content">Here's a quote inside a quote.</div>
+
+      <div class="tw-quote">
+        <div class="tw-header">
+          <img src="Q3_AVATAR" class="tw-avatar">
+          <div>
+            <div class="tw-name">@quoted3</div>
+            <div class="tw-handle">@quoted3</div>
+          </div>
+        </div>
+        <div class="tw-content">We must go deeper. 🌀</div>
+        <div class="tw-video">
+          <img src="Q3_GIF_THUMBNAIL">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tw-divider"></div>
+</div>
+</br></br></br>
+<div class="tw-container tw-dark">
+
+  <!-- Header -->
+  <div class="tw-header">
+    <img src="MAIN_AVATAR" class="tw-avatar">
+    <div>
+      <div class="tw-name" data-verified="true">Main Character</div>
+      <div class="tw-handle">@maincharacter</div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="tw-content">
+    This is a complete tweet with all features: media grids, GIF/video, quote tweets, and replies.
+  </div>
+  
+	<!-- GIF/video -->
+  <div class="tw-video">
+    <img src="VIDEO_THUMBNAIL">
+	<div class="tw-play-button"></div>
+  </div>
+  <div class="tw-actions">
+          <div class="tw-action">
+            <span class="icon reply"></span>
+            <span class="count">0</span>
+          </div>
+          <div class="tw-action">
+            <span class="icon retweet"></span>
+            <span class="count">0</span>
+          </div>
+          <div class="tw-action">
+            <span class="icon like"></span>
+            <span class="count">0</span>
+          </div>
+		  <div class="tw-action">
+			<span class="icon bookmark"></span>
+		  </div>
+		  <div class="tw-action">
+			<span class="icon view"></span>
+			<span class="count">0</span>
+		  </div>
+        </div>
+  <div class="tw-divider"></div>
+  
+    <div class="tw-header">
+    <img src="MAIN_AVATAR" class="tw-avatar">
+    <div>
+      <div class="tw-name" data-verified="true">Main Character <span class="tw-handle">@maincharacter · Feb 12</span></div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="tw-content">
+    This is a complete tweet with all features: media grids, GIF/video, quote tweets, and replies.
+  </div>
+  
+<div class="tw-actions">
+          <div class="tw-action">
+            <span class="icon reply"></span>
+            <span class="count">0</span>
+          </div>
+          <div class="tw-action">
+            <span class="icon retweet"></span>
+            <span class="count">0</span>
+          </div>
+          <div class="tw-action">
+            <span class="icon like"></span>
+            <span class="count">0</span>
+          </div>
+		  <div class="tw-action">
+			<span class="icon bookmark"></span>
+		  </div>
+		  <div class="tw-action">
+			<span class="icon view"></span>
+			<span class="count">0</span>
+		  </div>
+        </div>
+
+</div>
