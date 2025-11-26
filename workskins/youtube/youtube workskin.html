@@ -1,734 +1,354 @@
 <style>
 /* --------------------------------
+   CSS VARIABLES FOR THEMES
+---------------------------------- */
+.yt-light {
+    --bg-color: #fff;
+    --text-color: #0f0f0f;
+    --secondary-text: #555;
+    --accent-color: #065fd4;
+    --channel-subs-color: #666;
+    --btn-bg: #f2f2f2;
+    --btn-border: #d0d0d0;
+    --like-bg: #e6f1ff;
+    --like-color: #065fd4;
+    --add-comment-bg: #fff;
+    --progress-bg: #ddd;
+    --progress-fill: #ff0000;
+	--like-icon: url("https://i.imgur.com/ROIKzhr.png");;
+	--like-clicked-icon: url("https://i.imgur.com/ndU5Su6.png");
+	--dislike-icon: url("https://i.imgur.com/2JSNYPP.png");
+	--dislike-clicked-icon: url("https://i.imgur.com/9qmWc4g.png");
+}
+
+.yt-dark {
+    --bg-color: #181818;
+    --text-color: #fff;
+    --secondary-text: #ccc;
+    --accent-color: #065fd4;
+    --channel-subs-color: #aaa;
+    --btn-bg: #2f2f2f;
+    --btn-border: #555;
+    --like-bg: #123;
+    --like-color: #8bbdff;
+    --add-comment-bg: #202020;
+    --progress-bg: #333;
+    --progress-fill: #ff4444;
+	--like-icon: url("https://i.imgur.com/jzOiZNF.png");;
+	--like-clicked-icon: url("https://i.imgur.com/lN7v54j.png");
+	--dislike-icon: url("https://i.imgur.com/6cXL1GR.png");
+	--dislike-clicked-icon: url("https://i.imgur.com/KApq9Ny.png");
+}
+
+/* --------------------------------
    BASE YOUTUBE FONT & CONTAINER
 ---------------------------------- */
 .yt-container {
-    max-width: 1100px; /* wider for theater mode */
+    max-width: 1100px;
     margin: 0 auto;
     font-family: "Roboto", "Noto Sans", Arial, sans-serif;
-    color: #0f0f0f;
+    color: var(--text-color);
+    background: var(--bg-color);
 }
 
-/* Reset AO3 text indent */
-.yt-container p {
-    text-indent: 0 !important;
-}
+.yt-container p { text-indent: 0 !important; }
 
-/* Hide the checkbox */
-#yt-dark-toggle {
-    display: none;
-}
-
-/* Label container */
-.yt-dark-label {
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer;
-    gap: 8px;
-    font-weight: bold;
-    font-size: 14px;
-    user-select: none;
-    position: relative;
-}
-
-/* Slider background */
-.yt-dark-label::before {
-    content: '';
-    width: 40px;
-    height: 20px;
-    background: #ccc;
-    border-radius: 20px;
-    display: inline-block;
-    position: relative;
-    transition: background 0.3s;
-}
-
-/* Ball inside slider */
-.yt-dark-label .toggle-ball {
-    width: 16px;
-    height: 16px;
-    background: #fff;
-    border-radius: 50%;
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    transition: transform 0.3s, top 0.3s;
-}
-
-/* Ball moves to right and up slightly when checked */
-#yt-dark-toggle:checked + .yt-dark-label .toggle-ball {
-    transform: translateX(20px);
-    top: 2px !important;
-	left: 1px !important;
-}
-
-/* Slider background color in dark mode */
-#yt-dark-toggle:checked + .yt-dark-label::before {
-    background: #065fd4;
-}
-
-/* Text next to toggle */
-.yt-dark-label .toggle-text::before {
-	color: #fff;
-    content: "🌙 Dark Mode";
-}
-
-/* Change text when checked */
-#yt-dark-toggle:checked + .yt-dark-label .toggle-text::before {
-	color: #fff;
-    content: "☀ Light Mode";
-}
-
-/* ------------------------------------------
-
-/* Dark mode toggle checked inside container */
-.yt-container #yt-dark-toggle:checked ~ * {
-    background-color: #181818;
-    color: #fff;
-}
-
-/* Video info */
-.yt-container #yt-dark-toggle:checked ~ .yt-box .yt-info {
-    background-color: #181818;
-    color: #fff;
-}
-
-.yt-container #yt-dark-toggle:checked ~ .yt-box .yt-title,
-.yt-container #yt-dark-toggle:checked ~ .yt-box .yt-views,
-.yt-container #yt-dark-toggle:checked ~ .yt-box .yt-channel-name,
-.yt-container #yt-dark-toggle:checked ~ .yt-box .yt-channel-subs {
-    color: #fff;
-}
-
-.yt-container #yt-dark-toggle:checked ~ .yt-box .yt-description {
-    color: #ccc;
-}
-
-.yt-container #yt-dark-toggle:checked ~ .yt-box .yt-actions .btn-icon {
-    color: #fff;
-}
-
-/* Comments */
-.yt-container #yt-dark-toggle:checked ~ .yt-comments {
-    background-color: #181818;
-    color: #fff;
-}
-
-.yt-container #yt-dark-toggle:checked ~ .yt-comments .yt-comment {
-    background-color: #202020;
-    color: #fff;
-}
-
-.yt-container #yt-dark-toggle:checked ~ .yt-comments .c-user,
-.yt-container #yt-dark-toggle:checked ~ .yt-comments .c-meta,
-.yt-container #yt-dark-toggle:checked ~ .yt-comments .c-text {
-    color: #fff;
-}
-
-.yt-container #yt-dark-toggle:checked ~ .yt-comments .c-actions div {
-    color: #ccc;
-}
-
-
-/*-------------------------------------------
-
-/* Full-width search bar container */
+/* --------------------------------
+   SEARCH BAR
+---------------------------------- */
 .yt-search-bar {
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 8px;
-    width: 100%;
     padding: 12px 16px;
-    background: #000; /* black background */
-	justify-content: center; /* centers the inner elements */
-    box-sizing: border-box;
+    background: #000;
 }
 
-/* Input field */
 .yt-search-bar input[type="text"] {
     flex-grow: 1;
+    max-width: 40%;
     padding: 8px 12px;
     font-size: 14px;
     border-radius: 20px;
-	max-width: 40%;
     border: none;
     outline: none;
-    background: #111; /* slightly lighter black */
-	border-color: #111;
+    background: #111;
     color: #fff;
 }
 
-/* Placeholder color */
-.yt-search-bar input[type="text"]::placeholder {
-    color: #888;
-}
+.yt-search-bar input::placeholder { color: #888; }
 
-/* Search button */
 .yt-search-bar button {
-    padding: 8px 12px;
-    border: none;
+    padding: 8px 16px;
     border-radius: 20px;
-    background: #065fd4;
-    color: #fff;
+    border: none;
     font-weight: bold;
+    background: var(--accent-color);
+    color: #fff;
     cursor: pointer;
     transition: background 0.2s;
 }
 
-.yt-search-bar button:hover {
-    background: #054ab3;
-}
-
-/* Dark mode toggle inside search bar */
-.yt-search-bar .yt-dark-label {
-    margin-left: 8px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-weight: bold;
-    font-size: 12px;
-    cursor: pointer;
-    position: relative;
-}
+.yt-search-bar button:hover { background: #054ab3; }
 
 /* --------------------------------
-   THEATER MODE VIDEO BOX
+   VIDEO BOX
 ---------------------------------- */
-/* Video container */
-.yt-box {
-    width: 100%;
-    max-width: 1200px; /* optional: keep info area readable */
-    margin: 0 auto;    /* center the container */
-    display: flex;
-    flex-direction: column;
+.yt-box { display: flex; flex-direction: column; width: 100%; }
+.yt-video-thumbnail img { max-width: 1280px; width: 100%; height: auto; object-fit: cover; display: block; }
+
+.yt-info { padding: 16px; max-width: 1200px; width: 100%; margin: 0 auto; }
+
+.yt-title { font-size: 22px; font-weight: bold; margin: 12px 0 8px; }
+.yt-views { font-size: 14px; color: var(--secondary-text); margin-bottom: 16px; }
+
+.yt-channel { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.yt-channel .yt-avatar { width: 48px; height: 48px; border-radius: 50%; overflow: hidden; background: #aaa; }
+.yt-channel-info { flex-grow: 1; }
+.yt-channel-name { font-size: 15px; font-weight: bold; }
+.yt-channel-subs { font-size: 12px; color: var(--channel-subs-color); }
+.yt-subscribe-btn { background: #cc0000; color: #fff; padding: 8px 16px; border-radius: 20px; font-weight: bold; font-size: 13px; }
+
+.yt-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 20px; }
+.btn-icon { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 18px; border: 1px solid var(--btn-border); background: var(--btn-bg); font-size: 14px; color: var(--text-color); }
+.btn-icon .icon {
+    display: inline-block;
+    width: 20px;       /* desired width */
+    height: 20px;      /* desired height */
+    background-repeat: no-repeat;
+    background-position: center;
+	background-position: center;
+    vertical-align: middle; 
 }
-
-/* Video thumbnail — full width */
-.yt-video-thumbnail {
-    width: 100%;
-    background: #000;
-}
-
-.yt-video-thumbnail img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-}
-
-/* Info area (title, description, actions, channel info) */
-.yt-info {
-    padding: 16px;      /* spacing around text & buttons */
-    background: transparent;
-    width: 100%;
-    max-width: 1200px;  /* same as container for alignment */
-    margin: 0 auto;      /* center */
-    box-sizing: border-box;
-}
-
-
-/* --------------------------------
-   VIDEO PROGRESS BAR
----------------------------------- */
-.yt-progress-container {
-    width: 100%;
-    height: 6px;
-    background: #ddd;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 18px;
-}
-
-/* Optional "animated" progress fill */
-.yt-progress {
-    width: 38%; /* change to show more or less progress */
-    height: 100%;
-    background: #ff0000;
-}
-
-/* --------------------------------
-   TITLE + META
----------------------------------- */
-.yt-title {
-    font-size: 22px;
-    font-weight: bold;
-    margin: 12px 0 8px;
-}
-
-.yt-views {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 16px;
-}
-
-/* --------------------------------
-   CHANNEL HEADER
----------------------------------- */
-.yt-channel {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 14px;
-}
-
-.yt-channel .yt-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: #aaa;
-    overflow: hidden;
-}
-
-.yt-channel .yt-avatar img {
-    width: 100%;
-    height: 100%;
-}
-
-.yt-channel-info {
-    flex-grow: 1;
-}
-
-.yt-channel-name {
-    font-size: 15px;
-    font-weight: bold;
-}
-
-.yt-channel-subs {
-    font-size: 12px;
-    color: #666;
-}
-
-.yt-subscribe-btn {
-    background: #cc0000;
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 13px;
-}
-
-/* --------------------------------
-   ACTION BAR WITH ACCURATE ICONS
----------------------------------- */
-.yt-actions {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.btn-icon {
-    background: #f2f2f2;
-    padding: 6px 12px;
-    border-radius: 18px;
-    border: 1px solid #d0d0d0;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-/* Icon spacing */
-.btn-icon span.icon {
-    font-size: 16px;
-}
-
-/* Icons (Unicode approximations) */
-.icon-like::before { content: "👍"; }
-.icon-dislike::before { content: "👎"; }
+.icon-like { background-image: var(--like-icon);     background-size: 200% auto; }
+.icon-dislike { background-image: var(--dislike-icon);      background-size: 100% auto;}
 .icon-share::before { content: "↗"; }
 .icon-save::before { content: "💾"; }
 .icon-more::before { content: "⋯"; }
 
-/* --------------------------------
-   DESCRIPTION / TIMESTAMPS
----------------------------------- */
-.yt-description {
-    padding-top: 14px;
-    border-top: 1px solid #ddd;
-    font-size: 14px;
-    line-height: 1.55;
-}
-
-.yt-timestamp {
-    color: #065fd4;
-    font-weight: bold;
-}
+.yt-description { padding-top: 14px; border-top: 1px solid #ddd; font-size: 14px; line-height: 1.55; color: var(--text-color);}
+.yt-timestamp { color: var(--accent-color); font-weight: bold; }
 
 /* --------------------------------
    COMMENTS
 ---------------------------------- */
-.yt-comments {
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 16px;
-    border-radius: 6px;
-}
+.yt-comments { background: var(--add-comment-bg); border: 1px solid #ddd; padding: 16px; border-radius: 6px; color: var(--text-color); }
+.yt-comments-title { font-size: 18px; font-weight: bold; margin-bottom: 16px; }
 
-.yt-comments-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 16px;
-}
+/* Add comment */
+.yt-add-comment { display: flex; gap: 12px; margin-bottom: 24px; }
+.yt-add-comment .avatar { width: 40px; height: 40px; border-radius: 50%; background: #aaa; flex-shrink: 0; }
+.yt-add-comment textarea { width: 100%; resize: none; padding: 8px 12px; border-radius: 12px; border: 1px solid #ccc; background: var(--add-comment-bg); color: var(--text-color); font-family: inherit; font-size: 14px; }
+.yt-add-comment-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 6px; }
 
-/* Comment */
-.yt-comment {
+/* Comment layout */
+.yt-comment { display: flex; gap: 12px; margin-bottom: 18px; }
+.yt-comment .avatar { width: 40px; height: 40px; border-radius: 50%; background: #aaa; flex-shrink: 0; }
+.yt-comment .c-body { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+
+/* Wrap the header so username, badges, and timestamp align nicely */
+.c-header {
     display: flex;
-    gap: 12px;
-    margin-bottom: 22px;
-}
-
-.yt-comment .avatar {
-    width: 40px;
-    height: 40px;
-    background: #aaa;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-.yt-comment .avatar img {
-    width: 100%;
-    height: 100%;
-}
-
-.c-user {
-    font-weight: bold;
+    align-items: center;
+    gap: 6px; /* spacing between username, badges, and timestamp */
+    flex-wrap: wrap; /* wrap if too long */
 }
 
 .c-meta {
+    color: var(--secondary-text);
     font-size: 12px;
-    color: #666;
 }
 
-.c-text {
-    margin: 4px 0 6px;
-}
 
-/* Comment like buttons */
-.c-actions {
-    display: flex;
-    gap: 16px;
-    font-size: 13px;
-    color: #555;
-}
-
+.c-user { font-weight: bold; }
+.c-text { margin: 4px 0 6px; }
+.c-actions { display: flex; gap: 16px; font-size: 13px; color: var(--secondary-text); }
 .c-like::before { content: "👍 "; }
 .c-dislike::before { content: "👎 "; }
-.c-reply { color: #065fd4; }
+.c-reply { color: var(--accent-color); cursor: pointer; }
 
-/* -----------------------------
-   VERIFIED + ARTIST BADGES
------------------------------ */
-.yt-channel-name[data-verified="true"]::after,
-.c-user[data-verified="true"]::after {
-    content: " ✓";
-    color: #1e88e5;
-    font-weight: bold;
-    margin-left: 4px;
-}
+/* Verified / Artist badges */
+.c-user[data-verified="true"]::after { content: " ✓"; color: #1e88e5; font-weight: bold; margin-left: 4px; }
+.c-user[data-artist="true"]::after { content: " 🎵"; color: #1db954; font-weight: bold; margin-left: 4px; }
 
-.yt-channel-name[data-artist="true"]::after,
-.c-user[data-artist="true"]::after {
-    content: " 🎵";
-    color: #1db954; /* bright green music badge */
-    font-weight: bold;
-    margin-left: 4px;
-}
+/* Creator liked badges */
+.creator-like { display: inline-block; background: var(--like-bg); color: var(--like-color); font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-bottom: 4px; }
+.creator-liked-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--like-color); cursor: default; }
+.creator-liked-badge .cl-avatar { width: 18px; height: 18px; border-radius: 50%; overflow: hidden; position: relative; flex-shrink: 0; }
+.creator-liked-badge .cl-avatar img { width: 100%; height: 100%; }
+.creator-liked-badge .cl-heart { position: absolute; right: 0; bottom: 0; font-size: 12px; line-height: 1; color: #e53935; }
 
-/* -----------------------------
-   MEMBERSHIP BUTTON
------------------------------ */
-.yt-join-btn {
-    background: #e0e0e0;
-    color: #000;
-    padding: 8px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: bold;
-    margin-right: 8px;
-}
-#yt-dark-toggle:checked ~ .yt-container .yt-join-btn {
-    background: #3a3a3a;
+/* Replies */
+.replies { margin-left: 52px; border-left: 2px solid #eee; padding-left: 12px; display: flex; flex-direction: column; gap: 12px; }
+.replies .yt-comment { border-top: 1px solid #eee; padding-top: 8px; }
+
+/*-------------------------------------------------------
+
+/* --------------------------------
+   BUTTON STATE CLASSES
+---------------------------------- */
+
+/* Subscribe button states */
+.yt-subscribe-btn.subscribed {
+    background: #888; /* gray for subscribed */
     color: #fff;
-}
-
-/* -----------------------------
-   ADD COMMENT FIELD
------------------------------ */
-.yt-add-comment {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 26px;
-}
-
-.yt-add-comment .avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #aaa;
-}
-
-.yt-add-comment textarea {
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid #ccc;
-    padding: 8px;
-    resize: none;
-    font-family: inherit;
-    font-size: 14px;
-    background: transparent;
-    color: inherit;
-}
-
-.yt-add-comment-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    margin-top: 6px;
-}
-
-.yt-add-btn {
-    padding: 6px 14px;
-    border-radius: 16px;
-    font-size: 13px;
-    background: #e0e0e0;
-}
-#yt-dark-toggle:checked ~ .yt-container .yt-add-btn {
-    background: #2f2f2f;
-}
-.yt-add-btn.yt-primary {
-    background: #065fd4;
-    color: #fff;
-}
-
-/* -----------------------------
-   CREATOR LIKED COMMENT TAG
------------------------------ */
-.creator-like {
-    display: inline-block;
-    background: #e6f1ff;
-    color: #065fd4;
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 10px;
-    margin-bottom: 4px;
-}
-
-#yt-dark-toggle:checked ~ .yt-container .creator-like {
-    background: #123;
-    color: #8bbdff;
-}
-
-/* ------------------------------------------
-   CREATOR LIKED — BOTTOM-RIGHT HEART, INLINE WITH ACTIONS
-------------------------------------------- */
-.creator-liked-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    color: #065fd4;
     cursor: default;
 }
 
-/* Avatar container for overlay heart */
-.creator-liked-badge .cl-avatar {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    overflow: hidden;
-    position: relative; /* heart overlay positioning */
-    flex-shrink: 0;
+/* Like / Dislike states */
+.btn-icon.liked {
+    background-image: var(--like-clicked-icon);
+    color: var(--like-color);
+    border-color: var(--accent-color);
 }
 
-.creator-liked-badge .cl-avatar img {
-    width: 100%;
-    height: 100%;
+.btn-icon.disliked {
+    background-image: var(--dislike-clicked-icon);
+    color: #888;
+    border-color: #ccc;
 }
 
-/* CREATOR LIKED — HEART ONLY, bottom-right, no background */
-.creator-liked-badge .cl-heart {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    background: none;       /* remove background */
-    border: none;           /* remove border */
-    font-size: 12px;        /* slightly bigger to match YouTube */
-    line-height: 1;
-    color: #e53935;         /* bright red heart */
-}
+/* Comment like / dislike states */
+.c-like.liked { background-image: var(--like-clicked-icon); font-weight: bold; }
+.c-dislike.disliked { background-image: var(--dislike-clicked-icon); font-weight: bold; }
 
-/* DARK MODE */
-#yt-dark-toggle:checked ~ .yt-container .creator-liked-badge .cl-heart {
-    color: #ff7676;
-}
-
-#yt-dark-toggle:checked ~ .yt-container .creator-liked-badge {
-    background: #0d1a2b;
-    border-color: #445;
-    color: #ff7676;
-}
-
+/* Active hover overrides for states */
+.btn-icon.liked:hover, .btn-icon.disliked:hover { opacity: 0.85; }
+.c-like.liked:hover, .c-dislike.disliked:hover { text-decoration: underline; cursor: pointer; }
 
 </style>
 
-
-<div class="yt-container">
-
-<div class="yt-search-bar">
-    <input type="text" placeholder="Search">
-    <button>Search</button>
-
-    <!-- Dark mode toggle -->
-    <input type="checkbox" id="yt-dark-toggle">
-    <label for="yt-dark-toggle" class="yt-dark-label">
-        <div class="toggle-ball"></div>
-        <span class="toggle-text"></span>
-    </label>
-</div>
-
-
-<div class="yt-box">
-
-    <!-- VIDEO THUMBNAIL -->
-    <div class="yt-video-thumbnail">
-        <img src="YOUR_VIDEO_IMAGE_URL" alt="Video thumbnail">
+<div class="yt-container yt-light">
+    <div class="yt-search-bar">
+        <input type="text" placeholder="Search">
+        <button>Search</button>
     </div>
 
-    <!-- INFO AREA -->
-    <div class="yt-info">
-        <div class="yt-title">My Amazing Video Title</div>
-        <div class="yt-views">631,923 views • Feb 12, 2025</div>
+    <div class="yt-box">
+        <div class="yt-video-thumbnail">
+            <img src="YOUR_VIDEO_IMAGE_URL" alt="Video thumbnail">
+        </div>
 
-        <!-- CHANNEL HEADER -->
-        <div class="yt-channel">
-            <div class="yt-avatar">
-                <img src="YOUR_CHANNEL_AVATAR" alt="">
+        <div class="yt-info">
+            <div class="yt-title">My Amazing Video Title</div>
+            <div class="yt-views">631,923 views • Feb 12, 2025</div>
+
+            <div class="yt-channel">
+                <div class="yt-avatar"><img src="YOUR_CHANNEL_AVATAR" alt=""></div>
+                <div class="yt-channel-info">
+                    <div class="yt-channel-name">Channel Name</div>
+                    <div class="yt-channel-subs">1.2M subscribers</div>
+                </div>
+                <div class="yt-subscribe-btn">SUBSCRIBE</div>
             </div>
-            <div class="yt-channel-info">
-                <div class="yt-channel-name">Channel Name</div>
-                <div class="yt-channel-subs">1.2M subscribers</div>
+
+            <div class="yt-actions">
+                <div class="btn-icon"><span class="icon icon-like"></span>12K</div>
+                <div class="btn-icon"><span class="icon icon-dislike"></span>121</div>
+                <div class="btn-icon"><span class="icon icon-share"></span>Share</div>
+                <div class="btn-icon"><span class="icon icon-save"></span>Save</div>
+                <div class="btn-icon"><span class="icon icon-more"></span></div>
             </div>
-            <div class="yt-subscribe-btn">SUBSCRIBE</div>
+
+            <div class="yt-description">
+                Welcome to the video!  
+                Timestamps:<br><br>
+                <span class="yt-timestamp">0:00</span> — Intro<br>
+                <span class="yt-timestamp">1:43</span> — First Section<br>
+                <span class="yt-timestamp">6:22</span> — Plot Twist<br>
+                <span class="yt-timestamp">10:10</span> — Ending<br><br>
+                Your description text goes here.
+            </div>
         </div>
 
-        <!-- ACTION BAR -->
-        <div class="yt-actions">
-            <div class="btn-icon"><span class="icon icon-like"></span>12K</div>
-            <div class="btn-icon"><span class="icon icon-dislike"></span>121</div>
-            <div class="btn-icon"><span class="icon icon-share"></span>Share</div>
-            <div class="btn-icon"><span class="icon icon-save"></span>Save</div>
-            <div class="btn-icon"><span class="icon icon-more"></span></div>
-        </div>
+        <!-- COMMENTS -->
+        <div class="yt-comments">
+            <div class="yt-comments-title">Comments • 389</div>
 
-        <!-- DESCRIPTION -->
-        <div class="yt-description">
-            Welcome to the video!  
-            Timestamps:<br><br>
-
-            <span class="yt-timestamp">0:00</span> — Intro<br>
-            <span class="yt-timestamp">1:43</span> — First Section<br>
-            <span class="yt-timestamp">6:22</span> — Plot Twist<br>
-            <span class="yt-timestamp">10:10</span> — Ending<br><br>
-
-            Your description text goes here.
-        </div>
-    </div><!-- end yt-info -->
-	
-	
-	    <!-- COMMENTS -->
-    <div class="yt-comments">
-
-        <div class="yt-comments-title">Comments • 389</div>
-
-        <!-- ADD COMMENT INPUT -->
-        <div class="yt-add-comment">
-            <div class="avatar"></div>
-            <div style="flex-grow:1;">
-                <textarea placeholder="Add a comment…"></textarea>
-                <div class="yt-add-comment-actions">
-                    <div class="yt-add-btn">Cancel</div>
-                    <div class="yt-add-btn yt-primary">Comment</div>
+            <div class="yt-add-comment">
+                <div class="avatar"></div>
+                <div style="flex-grow:1;">
+                    <textarea placeholder="Add a comment…"></textarea>
+                    <div class="yt-add-comment-actions">
+                        <div class="yt-add-btn">Cancel</div>
+                        <div class="yt-add-btn yt-primary">Comment</div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- COMMENT 1 -->
-        <div class="yt-comment">
-            <div class="avatar">
-                <img src="AVATAR_URL" alt="">
-            </div>
+            <!-- Comment example -->
+            <div class="yt-comment">
+                <div class="avatar"><img src="AVATAR_URL" alt=""></div>
+                <div class="c-body">
+                    <div class="c-user" data-verified="true">User123</div>
+                    <div class="c-meta">2 hours ago</div>
+                    <div class="creator-like">Creator liked this comment</div>
+                    <div class="c-text">This theater mode layout looks *so* accurate!</div>
+                    <div class="c-actions">
+                        <div class="c-like">312</div>
+                        <div class="c-dislike">4</div>
+                        <div class="c-reply">Reply</div>
+                    </div>
 
-            <div class="c-body">
-
-                <!-- Verified user example -->
-                <div class="c-user" data-verified="true">User123</div>
-                <div class="c-meta">2 hours ago</div>
-
-                <!-- CREATOR LIKE BADGE -->
-                <div class="creator-like">Creator liked this comment</div>
-
-                <div class="c-text">
-                    This theater mode layout looks *so* accurate!
-                </div>
-
-                <div class="c-actions">
-                    <div class="c-like">312</div>
-                    <div class="c-dislike">4</div>
-                    <div class="c-reply">Reply</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- COMMENT 2 -->
-        <div class="yt-comment">
-            <div class="avatar"></div>
-
-            <div class="c-body">
-
-                <!-- Artist/Music badge example -->
-                <div class="c-user" data-artist="true">AnotherViewer</div>
-                <div class="c-meta">1 day ago</div>
-
-                <div class="c-text">
-                    Loving the progress bar! Makes it feel like a real YouTube page.
-                </div>
-
-                <div class="c-actions">
-                    <div class="c-like">98</div>
-                    <div class="c-dislike">1</div>
-                    <div class="c-reply">Reply</div>
+                    <div class="replies">
+                        <div class="yt-comment">
+                            <div class="avatar"><img src="YOUR_CHANNEL_AVATAR" alt=""></div>
+                            <div class="c-body">
+                                <div class="c-user" data-verified="true">Creator</div>
+                                <div class="c-meta">1 hour ago</div>
+                                <div class="c-text">Thanks for your comment!</div>
+                                <div class="c-actions">
+                                    <div class="c-like">5</div>
+                                    <div class="c-dislike">0</div>
+                                    <div class="c-reply">Reply</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-		
+
+            <!-- Another comment -->
+            <div class="yt-comment">
+                <div class="avatar"></div>
+                <div class="c-body">
+                    <div class="c-user" data-artist="true">AnotherViewer</div>
+                    <div class="c-meta">1 day ago</div>
+                    <div class="c-text">Loving the progress bar! Makes it feel like a real YouTube page.</div>
+                    <div class="c-actions">
+                        <div class="c-like">98</div>
+                        <div class="c-dislike">1</div>
+                        <div class="c-reply">Reply</div>
+                    </div>
+                </div>
+            </div>
+			
 <div class="yt-comment">
     <div class="avatar">
-        <img src="AVATAR_URL" alt="">
+        <img src="AVATAR_URL" alt="User Avatar">
     </div>
 
     <div class="c-body">
-        <div class="c-user" data-verified="true">User123</div>
-        <div class="c-meta">2 hours ago</div>
+        <div class="c-header">
+            <span class="c-user" data-verified="true">FanUser</span>
+            <span class="c-meta">3 hours ago</span>
+        </div>
 
         <div class="c-text">
-            This theater mode layout looks *so* accurate!
+            This video is amazing! Love the editing style.
         </div>
 
         <div class="c-actions">
-            <div class="c-like">312</div>
-            <div class="c-dislike">4</div>
-
-            <!-- CREATOR LIKED BADGE -->
+            <div class="c-like liked">125</div>
+            <div class="c-dislike">2</div>
+			            <!-- Creator liked badge -->
             <div class="creator-liked-badge">
                 <div class="cl-avatar">
-                    <img src="YOUR_CHANNEL_AVATAR" alt="">
+                    <img src="YOUR_CHANNEL_AVATAR" alt="Channel Avatar">
                     <span class="cl-heart">❤</span>
                 </div>
-                <span>Creator liked</span>
             </div>
-
             <div class="c-reply">Reply</div>
         </div>
     </div>
@@ -736,7 +356,42 @@
 
 
 
+        </div> <!-- end comments -->
 
-    </div><!-- end comments -->
+    </div> <!-- end yt-box -->
+</div>
 
-</div><!-- end yt-box -->
+
+</br></br></br>
+
+<div class="yt-container yt-light">
+
+<!-- Subscribe button example -->
+<div class="yt-subscribe-btn subscribed">SUBSCRIBED</div>
+
+<!-- Main video buttons -->
+<div class="yt-actions">
+    <div class="btn-icon liked"><span class="icon icon-like"></span>12K</div>
+    <div class="btn-icon"> <span class="icon icon-dislike"></span>121</div>
+    <div class="btn-icon"><span class="icon icon-share"></span>Share</div>
+    <div class="btn-icon"><span class="icon icon-save"></span>Save</div>
+    <div class="btn-icon"><span class="icon icon-more"></span></div>
+</div>
+
+<!-- Comment example with liked/disliked state -->
+<div class="yt-comment">
+    <div class="avatar"><img src="AVATAR_URL" alt=""></div>
+    <div class="c-body">
+        <div class="c-user">User123</div>
+        <div class="c-meta">2 hours ago</div>
+        <div class="c-text">This theater mode layout looks *so* accurate!</div>
+        <div class="c-actions">
+            <div class="c-like liked">312</div>
+            <div class="c-dislike">4</div>
+            <div class="c-reply">Reply</div>
+        </div>
+    </div>
+</div>
+
+
+</div>
