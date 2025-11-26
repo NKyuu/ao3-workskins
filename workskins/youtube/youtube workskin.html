@@ -19,6 +19,10 @@
 	--like-clicked-icon: url("https://i.imgur.com/ndU5Su6.png");
 	--dislike-icon: url("https://i.imgur.com/2JSNYPP.png");
 	--dislike-clicked-icon: url("https://i.imgur.com/9qmWc4g.png");
+	--verified-icon: url("https://i.imgur.com/Ouz4tBX.png");
+	--verified-music-icon: url("https://i.imgur.com/b77madd.png");
+	--save-icon: url("https://i.imgur.com/pYLnn0v.png");
+	--share-icon: url("https://i.imgur.com/KYG4lDH.png");
 }
 
 .yt-dark {
@@ -38,6 +42,10 @@
 	--like-clicked-icon: url("https://i.imgur.com/lN7v54j.png");
 	--dislike-icon: url("https://i.imgur.com/6cXL1GR.png");
 	--dislike-clicked-icon: url("https://i.imgur.com/KApq9Ny.png");
+	--verified-icon: url("https://i.imgur.com/AmnNnGE.png");
+	--verified-music-icon: url("https://i.imgur.com/3l82DCD.png");
+	--save-icon: url("https://i.imgur.com/rh1K5rq.png");
+	--share-icon: url("https://i.imgur.com/KApJLbH.png");
 }
 
 /* --------------------------------
@@ -112,7 +120,7 @@
 
 .yt-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 20px; }
 .btn-icon { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 18px; border: 1px solid var(--btn-border); background: var(--btn-bg); font-size: 14px; color: var(--text-color); }
-.btn-icon .icon {
+.icon {
     display: inline-block;
     width: 20px;       /* desired width */
     height: 20px;      /* desired height */
@@ -123,8 +131,8 @@
 }
 .icon-like { background-image: var(--like-icon);     background-size: 200% auto; }
 .icon-dislike { background-image: var(--dislike-icon);      background-size: 100% auto;}
-.icon-share::before { content: "↗"; }
-.icon-save::before { content: "💾"; }
+.icon-share { background-image: var(--share-icon); background-size: 100% auto;}
+.icon-save { background-image: var(--save-icon); background-size: 100% auto;}
 .icon-more::before { content: "⋯"; }
 
 .yt-description { padding-top: 14px; border-top: 1px solid #ddd; font-size: 14px; line-height: 1.55; color: var(--text-color);}
@@ -164,13 +172,13 @@
 .c-user { font-weight: bold; }
 .c-text { margin: 4px 0 6px; }
 .c-actions { display: flex; gap: 16px; font-size: 13px; color: var(--secondary-text); }
-.c-like::before { content: "👍 "; }
-.c-dislike::before { content: "👎 "; }
+.c-like { background-url: var(--like-icon); }
+.c-dislike { background-url: var(--dislike-icon); }
 .c-reply { color: var(--accent-color); cursor: pointer; }
 
 /* Verified / Artist badges */
-.c-user[data-verified="true"]::after { content: " ✓"; color: #1e88e5; font-weight: bold; margin-left: 4px; }
-.c-user[data-artist="true"]::after { content: " 🎵"; color: #1db954; font-weight: bold; margin-left: 4px; }
+.c-user[data-verified="true"] span, .yt-channel-name[data-verified="true"] span { background-image: var(--verified-icon); background-size: 70% auto; padding-left: 3px; }
+.c-user[data-artist="true"] span, .yt-channel-name[data-artist="true"] span { background-image: var(--verified-music-icon); background-size: 70% auto; padding-left: 3px;  }
 
 /* Creator liked badges */
 .creator-like { display: inline-block; background: var(--like-bg); color: var(--like-color); font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-bottom: 4px; }
@@ -197,16 +205,15 @@
 }
 
 /* Like / Dislike states */
-.btn-icon.liked {
-    background-image: var(--like-clicked-icon);
-    color: var(--like-color);
-    border-color: var(--accent-color);
+.icon.liked {
+    background-image: var(--like-clicked-icon) !important;
+	background-size: 200% auto;
 }
 
 .btn-icon.disliked {
     background-image: var(--dislike-clicked-icon);
     color: #888;
-    border-color: #ccc;
+    background-size: 100% auto;
 }
 
 /* Comment like / dislike states */
@@ -237,7 +244,7 @@
             <div class="yt-channel">
                 <div class="yt-avatar"><img src="YOUR_CHANNEL_AVATAR" alt=""></div>
                 <div class="yt-channel-info">
-                    <div class="yt-channel-name">Channel Name</div>
+                    <div class="yt-channel-name" data-verified="true" >Channel Name <span class="icon"></span></div>
                     <div class="yt-channel-subs">1.2M subscribers</div>
                 </div>
                 <div class="yt-subscribe-btn">SUBSCRIBE</div>
@@ -281,7 +288,7 @@
             <div class="yt-comment">
                 <div class="avatar"><img src="AVATAR_URL" alt=""></div>
                 <div class="c-body">
-                    <div class="c-user" data-verified="true">User123</div>
+                    <div class="c-user" data-verified="true">User123<span class="icon"> </span></div>
                     <div class="c-meta">2 hours ago</div>
                     <div class="creator-like">Creator liked this comment</div>
                     <div class="c-text">This theater mode layout looks *so* accurate!</div>
@@ -295,7 +302,7 @@
                         <div class="yt-comment">
                             <div class="avatar"><img src="YOUR_CHANNEL_AVATAR" alt=""></div>
                             <div class="c-body">
-                                <div class="c-user" data-verified="true">Creator</div>
+                                <div class="c-user" data-verified="true">Creator<span class="icon"> </span></div>
                                 <div class="c-meta">1 hour ago</div>
                                 <div class="c-text">Thanks for your comment!</div>
                                 <div class="c-actions">
@@ -313,7 +320,7 @@
             <div class="yt-comment">
                 <div class="avatar"></div>
                 <div class="c-body">
-                    <div class="c-user" data-artist="true">AnotherViewer</div>
+                    <div class="c-user" data-artist="true">AnotherViewer<span class="icon"><span></div>
                     <div class="c-meta">1 day ago</div>
                     <div class="c-text">Loving the progress bar! Makes it feel like a real YouTube page.</div>
                     <div class="c-actions">
@@ -331,7 +338,7 @@
 
     <div class="c-body">
         <div class="c-header">
-            <span class="c-user" data-verified="true">FanUser</span>
+            <span class="c-user" data-verified="true">FanUser <span class="icon"></span></span>
             <span class="c-meta">3 hours ago</span>
         </div>
 
@@ -371,7 +378,7 @@
 
 <!-- Main video buttons -->
 <div class="yt-actions">
-    <div class="btn-icon liked"><span class="icon icon-like"></span>12K</div>
+    <div class="btn-icon "><span class="icon icon-like liked"></span>12K</div>
     <div class="btn-icon"> <span class="icon icon-dislike"></span>121</div>
     <div class="btn-icon"><span class="icon icon-share"></span>Share</div>
     <div class="btn-icon"><span class="icon icon-save"></span>Save</div>
