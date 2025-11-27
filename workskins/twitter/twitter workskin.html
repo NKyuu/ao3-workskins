@@ -72,13 +72,71 @@
 
 /* ================== CONTENT ================== */
 .tw-content { margin-bottom: 8px; line-height: 1.4; padding-top: 0.6em; padding-bottom: 0.6em; }
-.tw-images img, .tw-video img { width: 100%; border-radius: 12px; object-fit: cover; }
 
 /* ================== IMAGE GRIDS ================== */
-.tw-images.tw-2 img { width: 49%; margin-right: 2%; }
-.tw-images.tw-2 img:last-child { margin-right: 0; }
-.tw-images.tw-3 img { width: 32%; margin-right: 2%; }
-.tw-images.tw-3 img:last-child { margin-right: 0; }
+.tw-images {
+  display: grid;
+  gap: 2%;
+  width: 100%;
+}
+
+/* 1 image: full width, natural aspect ratio */
+.tw-images.tw-1 img {
+  width: 100%;
+  aspect-ratio: 16/9; /* similar to Twitter */
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* 2 images: side by side portrait crop */
+.tw-images.tw-2 {
+  grid-template-columns: 1fr 1fr;
+}
+.tw-images.tw-2 img {
+  width: 100%;
+  aspect-ratio: 3/4; /* portrait style */
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* 3 images: left portrait, right stacked landscape */
+.tw-images.tw-3 {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr; /* left narrower */
+  grid-template-rows: 1fr 1fr; /* right stacked */
+  gap: 2%;
+  width: 100%;
+  aspect-ratio: 16/9; /* container ratio, adjusts automatically */
+}
+
+.tw-images.tw-3 img:first-child {
+  grid-row: 1 / span 2; /* left spans both rows */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.tw-images.tw-3 img:nth-child(2),
+.tw-images.tw-3 img:nth-child(3) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* 4 images: 2x2 landscape crop */
+.tw-images.tw-4 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.tw-images.tw-4 img {
+  width: 100%;
+  aspect-ratio: 16/9; /* crop each image */
+  object-fit: cover;
+  border-radius: 12px;
+}
+
 
 /* ================== VIDEO/GIF ================== */
 .tw-video {
@@ -237,9 +295,10 @@
 
   <!-- Media Grid -->
   <div class="tw-images tw-3">
-    <img src="IMG_1">
-    <img src="IMG_2">
-    <img src="IMG_3">
+    <img src="IMG_SRC">
+    <img src="IMG_SRC">
+    <img src="IMG_SRC">
+	
   </div>
 
   <!-- Actions -->
