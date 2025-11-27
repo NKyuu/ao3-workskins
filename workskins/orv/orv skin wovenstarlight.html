@@ -29,7 +29,9 @@
   linear-gradient(315deg, transparent 20px, #0091dd 20px), 
   linear-gradient(225deg, transparent 10px, #0091dd 10px), 
   linear-gradient(135deg, transparent 20px, #0091dd 20px);
+
 }
+
 			  
  .yellow {
   background: -moz-linear-gradient(45deg, transparent 10px, #f1a900 10px), -moz-linear-gradient(135deg, transparent 20px, #f1a900 20px), -moz-linear-gradient(225deg, transparent 10px, #f1a900 10px), -moz-linear-gradient(315deg, transparent 20px, #f1a900 20px);
@@ -60,12 +62,14 @@
 /* General setup for the main window. */
  .windorv {
   background-position: bottom left, bottom right, top right, top left;
-  -moz-background-size: 50% 50%;
-  -webkit-background-size: 50% 50%;
-  background-size: 50% 50%;
+  -moz-background-size: calc(50% + 1px) calc(50% + 1px);
+  -webkit-background-size: calc(50% + 1px) calc(50% + 1px);
+  background-size: calc(50% + 1px) calc(50% + 1px);
   background-repeat: no-repeat;
   padding: 2px;
   border-radius: 30px 15px;
+}
+
 }
 /* Accounting for AO3's additional <p> tags. */
  .windorv p { margin: 0; }
@@ -79,7 +83,9 @@
   text-shadow: 0 0 5px #052160;
   font-weight: bold;
   position: relative;
+
 }
+
 
 .yellow.lastwin::before {
   padding: 3px 35px 0 0;
