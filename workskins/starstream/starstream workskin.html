@@ -1,0 +1,311 @@
+<style>
+/************************************************************
+    STARSTREAM THEME SYSTEM — VARIABLES
+************************************************************/
+
+/* ========== DAY MODE VARIABLES ========== */
+.starstream-day {
+    --bg-main: #ffffff;
+    --bg-panel: #f6fcff;
+    --bg-bubble: #f4fbff;
+    --bg-header: #d9f6ff;
+
+    --border-main: #b6e6ff;
+
+    --text-main: #1b2a35;
+    --text-faded: rgba(27, 42, 53, 0.45);
+    --text-accent: #1188aa;
+
+    --badge-mod-bg: #ffe8a3;
+    --badge-mod-text: #775200;
+    --badge-mod-border: #ffd26b;
+
+    --badge-const-bg: #fff4c9;
+    --badge-const-text: #aa7d00;
+    --badge-const-border: #ffe08f;
+
+    --superchat-bg1: #bff0ff;
+    --superchat-bg2: #d7faff;
+    --superchat-border: #9bdfff;
+    --superchat-text-top: #006f97;
+    --superchat-text-msg: #003849;
+
+    --drop-shadow: rgba(140, 216, 255, 0.3);
+    --bubble-shadow: rgba(145, 225, 255, 0.2);
+}
+
+/* ========== NIGHT MODE VARIABLES (optional preset) ========== */
+
+.starstream-night {
+    --bg-main: #060615;
+    --bg-panel: #0a0a1c;
+    --bg-bubble: rgba(140,100,255,0.08);
+    --bg-header: #2a1f44;
+
+    --border-main: #3a2e66;
+
+    --text-main: #e6e6ff;
+    --text-faded: rgba(230, 230, 255, 0.4);
+    --text-accent: #b59bff;
+
+    --badge-mod-bg: #5a8cff;
+    --badge-mod-text: #ffffff;
+    --badge-mod-border: #4d78d6;
+
+    --badge-const-bg: #ffd86b;
+    --badge-const-text: #4b3600;
+    --badge-const-border: #ffca55;
+
+    --superchat-bg1: #382870;
+    --superchat-bg2: #6a47c4;
+    --superchat-border: #d9c2ff;
+    --superchat-text-top: #ffe49c;
+    --superchat-text-msg: #fffafc;
+
+    --drop-shadow: rgba(120, 80, 200, 0.4);
+    --bubble-shadow: rgba(140, 100, 255, 0.2);
+}
+
+/************************************************************
+    COMPONENT STYLES — use variables
+************************************************************/
+
+/*********** PANELS ***********/
+.ss-chat-window,
+.ss-donation-box,
+.ss-superchat {
+    background: var(--bg-main);
+    border: 1px solid var(--border-main);
+    padding: 1em;
+    margin: 1.5em 0;
+    border-radius: 10px;
+    color: var(--text-main);
+    box-shadow: 0 0 12px var(--drop-shadow);
+}
+
+/*********** HEADERS ***********/
+.ss-chat-header,
+.ss-donation-header {
+    background: var(--bg-header);
+    border-bottom: 2px solid var(--border-main);
+    padding-bottom: 0.3em;
+    margin-bottom: 0.8em;
+    font-size: 1.25em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: var(--text-accent);
+}
+
+/*********** CHAT ***********/
+.ss-chat-log {
+    max-height: 260px;
+    overflow-y: auto;
+    padding-right: .4em;
+}
+
+.ss-chat-line {
+    background: var(--bg-bubble);
+    border-radius: 6px;
+    padding: 0.45em 0.6em;
+    margin: 0.4em 0;
+    box-shadow: 0 0 6px var(--bubble-shadow);
+}
+
+.ss-time {
+    opacity: var(--text-faded);
+    margin-right: 0.3em;
+    font-size: 0.85em;
+}
+
+.ss-username {
+    color: var(--text-accent);
+    font-weight: bold;
+}
+
+/*********** BADGES ***********/
+.ss-badge {
+    display: inline-block;
+    font-size: 0.7em;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-right: 0.35em;
+}
+
+.ss-mod {
+    background: var(--badge-mod-bg);
+    color: var(--badge-mod-text);
+    border: 1px solid var(--badge-mod-border);
+}
+
+.ss-constellation {
+    background: var(--badge-const-bg);
+    color: var(--badge-const-text);
+    border: 1px solid var(--badge-const-border);
+}
+
+/*********** DONATIONS ***********/
+.ss-donor {
+    color: var(--text-accent);
+    font-weight: bold;
+}
+
+.ss-amount {
+    color: #ffb300;
+    font-weight: bold;
+}
+
+/*********** SUPERCHAT ***********/
+.ss-superchat {
+    background: linear-gradient(135deg, var(--superchat-bg1), var(--superchat-bg2));
+    border: 2px solid var(--superchat-border);
+    box-shadow: 0 0 16px var(--drop-shadow);
+}
+
+.ss-superchat-top {
+    color: var(--superchat-text-top);
+    font-weight: bold;
+    margin-bottom: 0.4em;
+}
+
+.ss-superchat-message {
+    color: var(--superchat-text-msg);
+    padding: 0.5em 0.2em;
+    font-style: italic;
+}
+
+/*********** FADE ANIMATION ***********/
+.fadein {
+    animation: ssFadeIn 0.7s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes ssFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+<div class="starstream-night">
+<div class="ss-chat-window">
+  <div class="ss-chat-header">Starstream Chat</div>
+
+  <div class="ss-chat-log">
+
+    <div class="ss-chat-line fadein">
+      <span class="ss-time">[20:13]</span>
+      <span class="ss-badge ss-mod">MOD</span>
+      <span class="ss-username">StellarSentinel</span>:
+      Please keep spoilers tagged ✨
+    </div>
+
+    <div class="ss-chat-line fadein">
+      <span class="ss-time">[20:14]</span>
+      <span class="ss-badge ss-constellation">★</span>
+      <span class="ss-username">NebulaKnight</span>:
+      LET’S GOOOOOO 🌠
+    </div>
+
+    <div class="ss-chat-line fadein">
+      <span class="ss-time">[20:14]</span>
+      <span class="ss-username">Voidling42</span>:
+      this new update looks sick 👀
+    </div>
+
+  </div>
+</div>
+</br></br></br>
+<div class="ss-superchat">
+  <div class="ss-superchat-top">
+    <span class="ss-donor">SupernovaSam</span>
+    sent <span class="ss-amount">250★</span>
+  </div>
+  <div class="ss-superchat-message">
+    “SUPERNOVA HYPE!! Burn bright, streamer!!”
+  </div>
+</div>
+</br></br></br>
+<div class="ss-chat-window">
+<div class="starstream-chat">
+  <div class="ss-chat-header">Starstream Chat</div>
+
+  <div class="ss-chat-message">
+    <span class="ss-username">NebulaKnight</span>:
+    omg this stream is SO good ✨
+  </div>
+
+  <div class="ss-chat-message ss-sub">
+    <span class="ss-username">SkyVoyager</span> has joined the <span class="ss-constellation">Constellation Tier!</span> 🌟
+  </div>
+
+  <div class="ss-chat-message">
+    <span class="ss-username">Voidling42</span>:
+    what's the next game on schedule?
+  </div>
+</div></div>
+</br></br></br>
+<div class="ss-donation-box">
+  <div class="ss-donation-header">Starlight Support</div>
+
+  <div class="ss-donation-line">
+    <span class="ss-donor">GalaxiaGold</span>
+    donated <span class="ss-amount">50★</span> — 
+    “Shining bright tonight!”
+  </div>
+
+  <div class="ss-donation-line">
+    <span class="ss-donor">CometChaser</span>
+    donated <span class="ss-amount">5★</span> — 
+    “Keep up the amazing stream!”
+  </div>
+</div>
+</div>
+</br></br></br>
+<div class="starstream-day">
+
+  <!-- CHAT -->
+  <div class="ss-chat-window">
+    <div class="ss-chat-header">Starstream Chat ☀️</div>
+
+    <div class="ss-chat-log">
+
+      <div class="ss-chat-line fadein">
+        <span class="ss-time">[09:13]</span>
+        <span class="ss-badge ss-mod">👑 MOD</span>
+        <span class="ss-username">StellarSentinel</span>:
+        Please keep spoilers tagged ✨
+      </div>
+
+      <div class="ss-chat-line fadein">
+        <span class="ss-time">[09:14]</span>
+        <span class="ss-badge ss-constellation">★</span>
+        <span class="ss-username">NebulaKnight</span>:
+        Morning sky vibes! 🌤️
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DONATIONS -->
+  <div class="ss-donation-box">
+    <div class="ss-donation-header">Starlight Support</div>
+
+    <div class="ss-donation-line">
+      <span class="ss-donor">SkyGazer</span> donated
+      <span class="ss-amount">25★</span> — “So bright today!”
+    </div>
+  </div>
+
+  <!-- SUPERCHAT -->
+  <div class="ss-superchat">
+    <div class="ss-superchat-top">
+      <span class="ss-donor">SupernovaSam</span>
+      sent <span class="ss-amount">250★</span>
+    </div>
+    <div class="ss-superchat-message">
+      “Shining bright like the morning sun!!”
+    </div>
+  </div>
+
+</div>
+
