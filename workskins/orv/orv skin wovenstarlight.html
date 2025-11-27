@@ -1,0 +1,666 @@
+<style>
+
+/* The main window. Change the width of your windows by altering the "max-width" value below. */
+ .userstuff > .windorv {
+	margin: 3em auto;
+	max-width: 600px;
+}
+
+/* Glowing around the edges. */
+ .userstuff > .blue {
+	box-shadow: 0 0 20px 10px #4fffff4f, 0 0 0px 10px #4fffff4a inset;
+}
+ .userstuff > .yellow {
+  box-shadow: 0 0 20px 10px #ffff004f, 0 0 0px 10px #ffff0046 inset;
+  transform: scaleY(-1);
+}
+
+/* Angular borders: blue, yellow, and white. */
+ .blue {
+  background: -moz-linear-gradient(45deg, transparent 10px, #0091dd 10px), -moz-linear-gradient(135deg, transparent 20px, #0091dd 20px), -moz-linear-gradient(225deg, transparent 10px, #0091dd 10px), -moz-linear-gradient(315deg, transparent 20px, #0091dd 20px);
+}
+ .blue {
+  background: -o-linear-gradient(45deg, transparent 10px, #0091dd 10px), -o-linear-gradient(315deg, transparent 20px, #0091dd 20px), -o-linear-gradient(225deg, transparent 10px, #0091dd 10px), -o-linear-gradient(135deg, transparent 20px, #0091dd 20px);
+}
+ .blue {
+  background: -webkit-linear-gradient(45deg, transparent 10px, #0091dd 10px), -webkit-linear-gradient(315deg, transparent 20px, #0091dd 20px), -webkit-linear-gradient(225deg, transparent 10px, #0091dd 10px), -webkit-linear-gradient(135deg, transparent 20px, #0091dd 20px);
+}
+ .blue {
+  background: linear-gradient(45deg, transparent 10px, #0091dd 10px), linear-gradient(315deg, transparent 20px, #0091dd 20px), linear-gradient(225deg, transparent 10px, #0091dd 10px), linear-gradient(135deg, transparent 20px, #0091dd 20px);
+}
+
+ .yellow {
+  background: -moz-linear-gradient(45deg, transparent 10px, #f1a900 10px), -moz-linear-gradient(135deg, transparent 20px, #f1a900 20px), -moz-linear-gradient(225deg, transparent 10px, #f1a900 10px), -moz-linear-gradient(315deg, transparent 20px, #f1a900 20px);
+}
+ .yellow {
+  background: -o-linear-gradient(45deg, transparent 10px, #f1a900 10px), -o-linear-gradient(315deg, transparent 20px, #f1a900 20px), -o-linear-gradient(225deg, transparent 10px, #f1a900 10px), -o-linear-gradient(135deg, transparent 20px, #f1a900 20px);
+}
+ .yellow {
+  background: -webkit-linear-gradient(45deg, transparent 10px, #f1a900 10px), -webkit-linear-gradient(315deg, transparent 20px, #f1a900 20px), -webkit-linear-gradient(225deg, transparent 10px, #f1a900 10px), -webkit-linear-gradient(135deg, transparent 20px, #f1a900 20px);
+}
+ .yellow {
+  background: linear-gradient(45deg, transparent 10px, #f1a900 10px), linear-gradient(315deg, transparent 20px, #f1a900 20px), linear-gradient(225deg, transparent 10px, #f1a900 10px), linear-gradient(135deg, transparent 20px, #f1a900 20px);
+}
+
+ .white {
+  background: -moz-linear-gradient(45deg, transparent 10px, #f0fefe 10px), -moz-linear-gradient(135deg, transparent 20px, #f0fefe 20px), -moz-linear-gradient(225deg, transparent 10px, #f0fefe 10px), -moz-linear-gradient(315deg, transparent 20px, #f0fefe 20px);
+}
+ .white {
+  background: -o-linear-gradient(45deg, transparent 10px, #f0fefe 10px), -o-linear-gradient(315deg, transparent 20px, #f0fefe 20px), -o-linear-gradient(225deg, transparent 10px, #f0fefe 10px), -o-linear-gradient(135deg, transparent 20px, #f0fefe 20px);
+}
+ .white {
+  background: -webkit-linear-gradient(45deg, transparent 10px, #f0fefe 10px), -webkit-linear-gradient(315deg, transparent 20px, #f0fefe 20px), -webkit-linear-gradient(225deg, transparent 10px, #f0fefe 10px), -webkit-linear-gradient(135deg, transparent 20px, #f0fefe 20px);
+}
+ .white {
+  background: linear-gradient(45deg, transparent 10px, #f0fefe 10px), linear-gradient(315deg, transparent 20px, #f0fefe 20px), linear-gradient(225deg, transparent 10px, #f0fefe 10px), linear-gradient(135deg, transparent 20px, #f0fefe 20px);
+}
+
+/* General setup for the main window. */
+ .windorv {
+  background-position: bottom left, bottom right, top right, top left;
+  -moz-background-size: 50% 50%;
+  -webkit-background-size: 50% 50%;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+  padding: 2px;
+  border-radius: 30px 15px;
+}
+/* Accounting for AO3's additional <p> tags. */
+ .windorv p { margin: 0; }
+
+/* Styling for the text within the window. */
+ .lastwin {
+  padding: 10px 5px;
+  color: #f0fefe;
+  font-family: Trebuchet MS, sans-serif;
+  text-transform: uppercase;
+  text-shadow: 0 0 5px #052160;
+  font-weight: bold;
+}
+
+/* The minimize, resize, and close buttons on the window. */
+ .lastwin::before {
+  content: "— ❐ ✖";
+  float: right;
+  padding: 3px 15px 0 0;
+  font-size: 1.2em;
+}
+ .yellow.lastwin::before {
+  padding: 3px 35px 0 0;
+  transform: scaleX(-1);
+  position: absolute;
+  z-index: 1;
+}
+
+/* Aligning the paragraphs within the window. */
+ .lastwin p {
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 10px;
+  width: fit-content;
+}
+ .lastwin p {
+  width: -webkit-fit-content;
+}
+ .lastwin p {
+  width: -moz-fit-content;
+}
+
+/* Scenario window navigation bar, angular and underlying borders. */
+ .outer {
+  padding: 1px;
+  margin-bottom: 25px;
+  margin-top: -5px;
+}
+ .blue .outer {
+  background: -webkit-linear-gradient(225deg, transparent 10px, #f0fefe 10px), -webkit-linear-gradient(315deg, transparent 20px, #f0fefe 20px);
+}
+ .blue .outer {
+  background: -o-linear-gradient(225deg, transparent 10px, #f0fefe 10px), -o-linear-gradient(315deg, transparent 20px, #f0fefe 20px);
+}
+ .blue .outer {
+  background: -moz-linear-gradient(225deg, transparent 10px, #f0fefe 10px), -moz-linear-gradient(315deg, transparent 20px, #f0fefe 20px);
+}
+ .blue .outer {
+  background: linear-gradient(225deg, transparent 10px, #f0fefe 10px), linear-gradient(135deg, transparent 20px, #f0fefe 20px);
+  box-shadow: 0px 10px 0px 0px #0091dd, 0px 16px 0px -1px #f0fefe;
+}
+
+ .yellow .outer {
+  background: -webkit-linear-gradient(225deg, transparent 20px, #f0fefe 20px), -webkit-linear-gradient(315deg, transparent 10px, #f0fefe 10px);
+}
+ .yellow .outer {
+  background: -o-linear-gradient(225deg, transparent 20px, #f0fefe 20px), -o-linear-gradient(315deg, transparent 10px, #f0fefe 10px);
+}
+ .yellow .outer {
+  background: -moz-linear-gradient(225deg, transparent 20px, #f0fefe 20px), -moz-linear-gradient(315deg, transparent 10px, #f0fefe 10px);
+}
+ .yellow .outer {
+  background: linear-gradient(225deg, transparent 20px, #f0fefe 20px), linear-gradient(135deg, transparent 10px, #f0fefe 10px);
+  box-shadow: 0px 10px 0px 0px #f1a900, 0px 16px 0px -1px #f0fefe;
+}
+
+/* More navbar angular borders and navbar text styling. */
+ .inner {
+  padding: 4px;
+  font-size: 1.2em;
+  text-align: center;
+}
+ .blue .inner {
+  background: -webkit-linear-gradient(225deg, transparent 10px, #01c8e8 10px), -webkit-linear-gradient(315deg, transparent 20px, #01c8e8 20px);
+}
+ .blue .inner {
+  background: -o-linear-gradient(225deg, transparent 10px, #01c8e8 10px), -o-linear-gradient(315deg, transparent 20px, #01c8e8 20px);
+}
+ .blue .inner {
+  background: -moz-linear-gradient(225deg, transparent 10px, #01c8e8 10px), -moz-linear-gradient(315deg, transparent 20px, #01c8e8 20px);
+}
+ .blue .inner {
+  background: linear-gradient(225deg, transparent 10px, #01c8e8 10px), linear-gradient(135deg, transparent 20px, #01c8e8 20px);
+}
+ .yellow .inner {
+  background: -webkit-linear-gradient(225deg, transparent 20px, #ffcb00 20px), -webkit-linear-gradient(315deg, transparent 10px, #ffcb00 10px);
+}
+ .yellow .inner {
+  background: -o-linear-gradient(225deg, transparent 20px, #ffcb00 20px), -o-linear-gradient(315deg, transparent 10px, #ffcb00 10px);
+}
+ .yellow .inner {
+  background: -moz-linear-gradient(225deg, transparent 20px, #ffcb00 20px), -moz-linear-gradient(315deg, transparent 10px, #ffcb00 10px);
+}
+ .yellow .inner {
+  background: linear-gradient(225deg, transparent 20px, #ffcb00 20px), linear-gradient(135deg, transparent 10px, #ffcb00 10px);
+}
+
+/* Navbar styling. */
+ .scenario {
+  background-position: top right, top left !important;
+  -moz-background-size: 50% 100% !important;
+  -webkit-background-size: 50% 100% !important;
+  background-size: 50% 100% !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Styling for the headings, like scenario name and clear conditions. */
+ .header {
+  font-size: 1.4em;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+/* Styling for all other text in the scenario window. */
+ .lastwin p:not(.header) {
+  text-align: left;
+}
+
+/* Flipping the story window appropriately. */
+ .yellow.lastwin { transform: scale(-1, -1); }
+ .yellow.lastwin > * { transform: scaleX(-1); }
+ 
+ /* ---------------------------------------------------- */
+/* --------------------- RED -------------------------- */
+/* ---------------------------------------------------- */
+
+/* Glow */
+.userstuff > .red {
+  box-shadow: 0 0 20px 10px #ff4f4f4f, 0 0 0px 10px #ff4f4f4a inset;
+}
+
+/* Angular borders */
+.red {
+  background: linear-gradient(45deg, transparent 10px, #cc0000 10px),
+              linear-gradient(315deg, transparent 20px, #cc0000 20px),
+              linear-gradient(225deg, transparent 10px, #cc0000 10px),
+              linear-gradient(135deg, transparent 20px, #cc0000 20px);
+}
+
+/* Scenario bar (outer & inner) */
+.red .outer {
+  background: linear-gradient(225deg, transparent 10px, #f0fefe 10px),
+              linear-gradient(135deg, transparent 20px, #f0fefe 20px);
+  box-shadow: 0px 10px 0px 0px #cc0000, 0px 16px 0px -1px #f0fefe;
+}
+.red .inner {
+  background: linear-gradient(225deg, transparent 10px, #ff3333 10px),
+              linear-gradient(135deg, transparent 20px, #ff3333 20px);
+}
+
+/* ---------------------------------------------------- */
+/* --------------------- GREEN ------------------------ */
+/* ---------------------------------------------------- */
+
+.userstuff > .green {
+  box-shadow: 0 0 20px 10px #4fff4f4f, 0 0 0px 10px #4fff4f4a inset;
+}
+
+.green {
+  background: linear-gradient(45deg, transparent 10px, #00aa44 10px),
+              linear-gradient(315deg, transparent 20px, #00aa44 20px),
+              linear-gradient(225deg, transparent 10px, #00aa44 10px),
+              linear-gradient(135deg, transparent 20px, #00aa44 20px);
+}
+
+.green .outer {
+  background: linear-gradient(225deg, transparent 10px, #f0fefe 10px),
+              linear-gradient(135deg, transparent 20px, #f0fefe 20px);
+  box-shadow: 0px 10px 0px 0px #00aa44, 0px 16px 0px -1px #f0fefe;
+}
+.green .inner {
+  background: linear-gradient(225deg, transparent 10px, #00dd66 10px),
+              linear-gradient(135deg, transparent 20px, #00dd66 20px);
+}
+
+/* ---------------------------------------------------- */
+/* ------------------- DARK BLUE ---------------------- */
+/* ---------------------------------------------------- */
+
+.userstuff > .darkblue {
+  box-shadow: 0 0 20px 10px #1f3fff4f, 0 0 0px 10px #1f3fff4a inset;
+}
+
+.darkblue {
+  background: linear-gradient(45deg, transparent 10px, #002a77 10px),
+              linear-gradient(315deg, transparent 20px, #002a77 20px),
+              linear-gradient(225deg, transparent 10px, #002a77 10px),
+              linear-gradient(135deg, transparent 20px, #002a77 20px);
+}
+
+.darkblue .outer {
+  background: linear-gradient(225deg, transparent 10px, #d9f4ff 10px),
+              linear-gradient(135deg, transparent 20px, #d9f4ff 20px);
+  box-shadow: 0px 10px 0px 0px #002a77, 0px 16px 0px -1px #d9f4ff;
+}
+.darkblue .inner {
+  background: linear-gradient(225deg, transparent 10px, #0048c8 10px),
+              linear-gradient(135deg, transparent 20px, #0048c8 20px);
+}
+
+/* ---------------------------------------------------- */
+/* ---------------------- BLACK ----------------------- */
+/* ---------------------------------------------------- */
+
+.userstuff > .black {
+  box-shadow: 0 0 20px 10px #8888884f, 0 0 0px 10px #8888884a inset;
+}
+
+.black {
+  background: linear-gradient(45deg, transparent 10px, #0a0a0a 10px),
+              linear-gradient(315deg, transparent 20px, #0a0a0a 20px),
+              linear-gradient(225deg, transparent 10px, #0a0a0a 10px),
+              linear-gradient(135deg, transparent 20px, #0a0a0a 20px);
+}
+
+.black .outer {
+  background: linear-gradient(225deg, transparent 10px, #ccc 10px),
+              linear-gradient(135deg, transparent 20px, #ccc 20px);
+  box-shadow: 0px 10px 0px 0px #0a0a0a, 0px 16px 0px -1px #ccc;
+}
+.black .inner {
+  background: linear-gradient(225deg, transparent 10px, #333 10px),
+              linear-gradient(135deg, transparent 20px, #333 20px);
+}
+
+/* ---------------------------------------------------- */
+/*                ANIMATIONS                            */
+/* ---------------------------------------------------- */
+
+/* soft twinkling */
+@keyframes twinkle {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+/* drifting starfield */
+@keyframes drift {
+  0% { background-position: 0 0; }
+  100% { background-position: 800px 800px; }
+}
+
+/* nebula shimmer */
+@keyframes nebulaGlow {
+  0% { opacity: 0.35; }
+  50% { opacity: 0.55; }
+  100% { opacity: 0.35; }
+}
+
+/* shooting star streak */
+@keyframes shootingStar {
+  0% {
+    transform: translate(-150px, -150px) rotate(45deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  40% {
+    transform: translate(300px, 300px) rotate(45deg);
+    opacity: 0.7;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    transform: translate(600px, 600px) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+
+/* ---------------------------------------------------- */
+/*                 MAIN STAR SKY WINDOW                 */
+/* ---------------------------------------------------- */
+
+.userstuff > .starry {
+  box-shadow: 0 0 20px 10px #7aa2ff66,
+              0 0 0px 10px #7aa2ff22 inset;
+}
+
+.starry {
+  position: relative;
+  overflow: hidden;
+
+  /* drifting background star layer */
+  background:
+    url("data:image/svg+xml;utf8,\
+    <svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'>\
+      <rect width='600' height='600' fill='black'/>\
+      <circle cx='50' cy='100' r='2' fill='white'/>\
+      <circle cx='250' cy='200' r='1.5' fill='white'/>\
+      <circle cx='400' cy='300' r='2' fill='white'/>\
+      <circle cx='150' cy='450' r='2' fill='white'/>\
+      <circle cx='500' cy='150' r='1.2' fill='white'/>\
+      <circle cx='350' cy='50' r='1.5' fill='white'/>\
+    </svg>")
+    repeat;
+  background-size: 600px 600px;
+  animation: drift 120s linear infinite;
+  z-index: 0;
+}
+
+
+/* ---------------------------------------------------- */
+/*                     NEBULA                           */
+/* ---------------------------------------------------- */
+
+.starry::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at 70% 30%, rgba(130,70,200,0.45), transparent 60%),
+    radial-gradient(circle at 30% 70%, rgba(50,120,220,0.45), transparent 60%);
+
+  animation: nebulaGlow 18s ease-in-out infinite;
+  z-index: 1;
+}
+
+
+/* ---------------------------------------------------- */
+/*            GALAXY SWIRLS (SPIRAL ARMS)               */
+/* ---------------------------------------------------- */
+
+.starry .galaxy-layer {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+
+  background:
+    radial-gradient(ellipse 300px 100px at 50% 50%, rgba(160,140,255,0.18), transparent 70%),
+    radial-gradient(ellipse 200px 70px at 50% 50%, rgba(200,180,255,0.18), transparent 70%),
+    radial-gradient(ellipse 120px 40px at 50% 50%, rgba(255,255,255,0.18), transparent 70%);
+}
+
+
+/* ---------------------------------------------------- */
+/*                    SHOOTING STARS                    */
+/* ---------------------------------------------------- */
+
+.starry .shooting-star {
+  position: absolute;
+  width: 3px;
+  height: 120px;
+  background: linear-gradient(to bottom, white, transparent);
+  opacity: 0;
+  transform: rotate(45deg);
+  z-index: 3;
+  animation: shootingStar 6s linear infinite;
+}
+
+/* You get 2 shooting stars on different timers */
+.starry .shooting-star:nth-child(1) {
+  top: 10%;
+  left: 20%;
+  animation-delay: 2s;
+}
+.starry .shooting-star:nth-child(2) {
+  top: 40%;
+  left: 60%;
+  animation-delay: 4s;
+}
+
+
+/* ---------------------------------------------------- */
+/*                  CONTENT LAYER                       */
+/* ---------------------------------------------------- */
+
+.starry.lastwin {
+  position: relative;
+  z-index: 5;
+  color: #eaf8ff;
+  text-shadow: 0 0 6px #7aa2ff;
+}
+
+
+/* ---------------------------------------------------- */
+/*      ORV-STYLE OUTER AND INNER BARS                  */
+/* ---------------------------------------------------- */
+
+.starry .outer {
+  background:
+    linear-gradient(225deg, transparent 10px, #dfe8ff 10px),
+    linear-gradient(135deg, transparent 20px, #dfe8ff 20px);
+  box-shadow:
+    0px 10px 0px 0px #12204c,
+    0px 16px 0px -1px #dfe8ff;
+  z-index: 5;
+}
+
+.starry .inner {
+  background:
+    linear-gradient(225deg, transparent 10px, #233a7a 10px),
+    linear-gradient(135deg, transparent 20px, #233a7a 20px);
+  color: #eaf4ff;
+  z-index: 5;
+}
+
+
+</style>
+
+<!-- REGULAR SYSTEM WINDOW, WITH HEADER -->
+<!-- The striped container -->
+<div class="blue windorv"><div class="white windorv"><div class="blue windorv"><div class="white windorv"><div class="blue windorv lastwin">
+	
+	<!-- SCENARIO TYPE -->
+	<!-- Change this to whatever you desire. You can also remove this part entirely, if you don't want a heading. -->
+	<div class="scenario outer"><div class="scenario inner">
+		<p>Main Scenario #1</p>
+	</div></div>
+
+	<!-- SCENARIO NAME AND CLEAR CONDITIONS -->
+	<!-- Place each line inside a paragraph with class "header" -->
+	<p class="header">[Proof of Value]</p>
+	<p class="header">Kill one or more living organisms.</p>
+
+	<!-- FURTHER SCENARIO DETAILS -->
+	<!-- Use line breaks i.e. <br /> tags to separate each line -->
+	<p>Category: Main<br />
+	Difficulty: F<br />
+	Time limit: 30 minutes<br />
+	Reward: 300 coins<br />
+	Penalty for failure: Death</p>
+
+</div></div></div></div></div>
+
+</br></br></br>
+
+<!-- REGULAR SYSTEM WINDOW, WITHOUT HEADER -->
+<!-- The striped container -->
+<div class="blue windorv"><div class="white windorv"><div class="blue windorv"><div class="white windorv"><div class="blue windorv lastwin">
+	
+	<!-- Note, no header here! -->
+
+	<!-- Any information you'd like can go here, in any order -->
+	<p>Your message here</p>
+	<p class="header">Header sample</p>
+	<p>Your message here</p>
+	<p class="header">Add as many headers and lines of text as desired</p>
+
+</div></div></div></div></div>
+
+</br></br></br>
+<!-- STORY WINDOW -->
+<!-- The striped container. Note: story windows use "yellow windorv", not "blue windorv"! -->
+<div class="yellow windorv"><div class="white windorv"><div class="yellow windorv"><div class="white windorv"><div class="yellow windorv lastwin">
+	
+	<!-- As before, heading is optional. I've provided it here, but feel free to remove it. -->
+	<div class="scenario outer"><div class="scenario inner">
+		<p>Main Scenario #1</p>
+	</div></div>
+
+	<!-- And content can also be added with any style in any order. -->
+	<p>Your message here</p>
+	<p class="header">Header sample</p>
+	<p>Your message here</p>
+	<p class="header">Add as many headers and lines of text as desired</p>
+
+</div></div></div></div></div>
+
+</br></br></br>
+
+<div class="red windorv"><div class="white windorv"><div class="red windorv"><div class="white windorv"><div class="red windorv lastwin">
+	
+	<!-- SCENARIO TYPE -->
+	<!-- Change this to whatever you desire. You can also remove this part entirely, if you don't want a heading. -->
+	<div class="scenario outer"><div class="scenario inner">
+		<p>Main Scenario #1</p>
+	</div></div>
+
+	<!-- SCENARIO NAME AND CLEAR CONDITIONS -->
+	<!-- Place each line inside a paragraph with class "header" -->
+	<p class="header">[Proof of Value]</p>
+	<p class="header">Kill one or more living organisms.</p>
+
+	<!-- FURTHER SCENARIO DETAILS -->
+	<!-- Use line breaks i.e. <br /> tags to separate each line -->
+	<p>Category: Main<br />
+	Difficulty: F<br />
+	Time limit: 30 minutes<br />
+	Reward: 300 coins<br />
+	Penalty for failure: Death</p>
+
+</div></div></div></div></div>
+
+</br></br></br>
+
+<div class="green windorv"><div class="white windorv"><div class="green windorv"><div class="white windorv"><div class="green windorv lastwin">
+	
+	<!-- SCENARIO TYPE -->
+	<!-- Change this to whatever you desire. You can also remove this part entirely, if you don't want a heading. -->
+	<div class="scenario outer"><div class="scenario inner">
+		<p>Main Scenario #1</p>
+	</div></div>
+
+	<!-- SCENARIO NAME AND CLEAR CONDITIONS -->
+	<!-- Place each line inside a paragraph with class "header" -->
+	<p class="header">[Proof of Value]</p>
+	<p class="header">Kill one or more living organisms.</p>
+
+	<!-- FURTHER SCENARIO DETAILS -->
+	<!-- Use line breaks i.e. <br /> tags to separate each line -->
+	<p>Category: Main<br />
+	Difficulty: F<br />
+	Time limit: 30 minutes<br />
+	Reward: 300 coins<br />
+	Penalty for failure: Death</p>
+
+</div></div></div></div></div>
+
+</br></br></br>
+
+<div class="darkblue windorv"><div class="white windorv"><div class="darkblue windorv"><div class="white windorv"><div class="darkblue windorv lastwin">
+	
+	<!-- SCENARIO TYPE -->
+	<!-- Change this to whatever you desire. You can also remove this part entirely, if you don't want a heading. -->
+	<div class="scenario outer"><div class="scenario inner">
+		<p>Main Scenario #1</p>
+	</div></div>
+
+	<!-- SCENARIO NAME AND CLEAR CONDITIONS -->
+	<!-- Place each line inside a paragraph with class "header" -->
+	<p class="header">[Proof of Value]</p>
+	<p class="header">Kill one or more living organisms.</p>
+
+	<!-- FURTHER SCENARIO DETAILS -->
+	<!-- Use line breaks i.e. <br /> tags to separate each line -->
+	<p>Category: Main<br />
+	Difficulty: F<br />
+	Time limit: 30 minutes<br />
+	Reward: 300 coins<br />
+	Penalty for failure: Death</p>
+
+</div></div></div></div></div>
+
+</br></br></br>
+
+<div class="black windorv"><div class="white windorv"><div class="black windorv"><div class="white windorv"><div class="black windorv lastwin">
+	
+	<!-- SCENARIO TYPE -->
+	<!-- Change this to whatever you desire. You can also remove this part entirely, if you don't want a heading. -->
+	<div class="scenario outer"><div class="scenario inner">
+		<p>Main Scenario #1</p>
+	</div></div>
+
+	<!-- SCENARIO NAME AND CLEAR CONDITIONS -->
+	<!-- Place each line inside a paragraph with class "header" -->
+	<p class="header">[Proof of Value]</p>
+	<p class="header">Kill one or more living organisms.</p>
+
+	<!-- FURTHER SCENARIO DETAILS -->
+	<!-- Use line breaks i.e. <br /> tags to separate each line -->
+	<p>Category: Main<br />
+	Difficulty: F<br />
+	Time limit: 30 minutes<br />
+	Reward: 300 coins<br />
+	Penalty for failure: Death</p>
+
+</div></div></div></div></div>
+
+</br></br></br>
+
+<div class="starry windorv"><div class="white windorv"><div class="starry windorv"><div class="white windorv"><div class="starry windorv lastwin">
+
+  <!-- GALAXY SWIRLS -->
+  <div class="galaxy-layer"></div>
+
+  <!-- SHOOTING STARS -->
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
+  
+  <div class="scenario outer"><div class="scenario inner">
+    <p>Constellation Scenario</p>
+  </div></div>
+
+  <p class="header">[Under the Boundless Sky]</p>
+  <p class="header">Your message here, drifting beneath a galaxy of stars.</p>
+  
+  	<p>Category: Main<br />
+	Difficulty: F<br />
+	Time limit: 30 minutes<br />
+	Reward: 300 coins<br />
+	Penalty for failure: Death</p>
+
+</div></div></div></div></div>
+
