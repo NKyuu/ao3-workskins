@@ -300,165 +300,169 @@
 }
 
 /* ---------------------------------------------------- */
-/*                ANIMATIONS                            */
+/*                     ANIMATIONS                       */
 /* ---------------------------------------------------- */
 
 /* soft twinkling */
 @keyframes twinkle {
-  0% { opacity: 0.6; }
+  0% { opacity: 0.3; }
   50% { opacity: 1; }
-  100% { opacity: 0.6; }
+  100% { opacity: 0.3; }
 }
 
 /* drifting starfield */
 @keyframes drift {
-  0% { background-position: 0 0; }
-  100% { background-position: 800px 800px; }
+  0% { background-position: 0 0, 0 0, 0 0, 0 0, 0 0; }
+  100% { background-position: 600px 400px, 400px 600px, 800px 300px, 500px 500px, 700px 200px; }
 }
 
 /* nebula shimmer */
 @keyframes nebulaGlow {
-  0% { opacity: 0.35; }
-  50% { opacity: 0.55; }
-  100% { opacity: 0.35; }
+  0% { opacity: 0.25; }
+  50% { opacity: 0.45; }
+  100% { opacity: 0.25; }
 }
 
 /* shooting star streak */
 @keyframes shootingStar {
-  0% {
-    transform: translate(-150px, -150px) rotate(45deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  40% {
-    transform: translate(300px, 300px) rotate(45deg);
-    opacity: 0.7;
-  }
-  70% {
-    opacity: 0;
-  }
-  100% {
-    transform: translate(600px, 600px) rotate(45deg);
-    opacity: 0;
-  }
+  0% { transform: translate(-150px, -150px) rotate(-45deg); opacity: 0; }
+  10% { opacity: 1; }
+  40% { transform: translate(300px, 300px) rotate(-45deg); opacity: 0.7; }
+  70% { opacity: 0; }
+  100% { transform: translate(600px, 600px) rotate(-45deg); opacity: 0; }
 }
 
-
 /* ---------------------------------------------------- */
-/*                 MAIN STAR SKY WINDOW                 */
+/*                 STAR SKY BASE                        */
 /* ---------------------------------------------------- */
-
-.userstuff > .starry {
-  box-shadow: 0 0 20px 10px #7aa2ff66,
-              0 0 0px 10px #7aa2ff22 inset;
-}
-
-.starry {
+.starry.windorv {
   position: relative;
   overflow: hidden;
-
-  /* drifting background star layer */
-  background:
-    url("data:image/svg+xml;utf8,\
-    <svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'>\
-      <rect width='600' height='600' fill='black'/>\
-      <circle cx='50' cy='100' r='2' fill='white'/>\
-      <circle cx='250' cy='200' r='1.5' fill='white'/>\
-      <circle cx='400' cy='300' r='2' fill='white'/>\
-      <circle cx='150' cy='450' r='2' fill='white'/>\
-      <circle cx='500' cy='150' r='1.2' fill='white'/>\
-      <circle cx='350' cy='50' r='1.5' fill='white'/>\
-    </svg>")
-    repeat;
-  background-size: 600px 600px;
-  animation: drift 120s linear infinite;
+  background: linear-gradient(#020617, #091730);
   z-index: 0;
 }
 
-
-/* ---------------------------------------------------- */
-/*                     NEBULA                           */
-/* ---------------------------------------------------- */
-
-.starry::before {
+/* Drifting stars background */
+.starry.windorv::before {
   content: "";
   position: absolute;
   inset: 0;
-
   background:
-    radial-gradient(circle at 70% 30%, rgba(130,70,200,0.45), transparent 60%),
-    radial-gradient(circle at 30% 70%, rgba(50,120,220,0.45), transparent 60%);
-
-  animation: nebulaGlow 18s ease-in-out infinite;
+    radial-gradient(circle 1px at 10% 20%, #ffffff88, transparent 0),
+    radial-gradient(circle 1px at 30% 60%, #ffffff66, transparent 0),
+    radial-gradient(circle 1px at 50% 40%, #ffffff55, transparent 0),
+    radial-gradient(circle 1px at 70% 20%, #ffffff66, transparent 0),
+    radial-gradient(circle 1px at 85% 70%, #ffffff44, transparent 0);
+  background-repeat: repeat;
+  background-size: 600px 600px;
+  animation: drift 150s linear infinite;
   z-index: 1;
 }
 
-
-/* ---------------------------------------------------- */
-/*            GALAXY SWIRLS (SPIRAL ARMS)               */
-/* ---------------------------------------------------- */
-
-.starry .galaxy-layer {
-  content: "";
+/* Galaxy swirls */
+.starry.windorv .galaxy-layer {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 2;
-
   background:
     radial-gradient(ellipse 300px 100px at 50% 50%, rgba(160,140,255,0.18), transparent 70%),
     radial-gradient(ellipse 200px 70px at 50% 50%, rgba(200,180,255,0.18), transparent 70%),
     radial-gradient(ellipse 120px 40px at 50% 50%, rgba(255,255,255,0.18), transparent 70%);
 }
 
-
-/* ---------------------------------------------------- */
-/*                    SHOOTING STARS                    */
-/* ---------------------------------------------------- */
-
-.starry .shooting-star {
+/* Twinkle stars */
+.starry.windorv .twinkle-star {
   position: absolute;
-  width: 3px;
-  height: 120px;
-  background: linear-gradient(to bottom, white, transparent);
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: twinkle 3s infinite ease-in-out;
+}
+
+/* Shooting stars */
+.starry.windorv .shooting-star {
+  position: absolute;
+  width: 2px;
+  height: 80px;
+  background: linear-gradient(to top, white, transparent);
   opacity: 0;
-  transform: rotate(45deg);
+  transform: rotate(-45deg);
   z-index: 3;
-  animation: shootingStar 6s linear infinite;
+  animation: shootingStar linear infinite;
 }
 
-/* You get 2 shooting stars on different timers */
-.starry .shooting-star:nth-child(1) {
-  top: 10%;
-  left: 20%;
-  animation-delay: 2s;
-}
-.starry .shooting-star:nth-child(2) {
-  top: 40%;
-  left: 60%;
-  animation-delay: 4s;
-}
+/* Multiple shooting stars */
+.starry.windorv .shooting-star:nth-child(1) { top: 5%; left: 10%; animation-delay: 0s; animation-duration: 5s; }
+.starry.windorv .shooting-star:nth-child(2) { top: 15%; left: 50%; animation-delay: 1s; animation-duration: 6s; }
+.starry.windorv .shooting-star:nth-child(3) { top: 30%; left: 20%; animation-delay: 2s; animation-duration: 7s; }
+.starry.windorv .shooting-star:nth-child(4) { top: 50%; left: 40%; animation-delay: 0.5s; animation-duration: 5.5s; }
+.starry.windorv .shooting-star:nth-child(5) { top: 65%; left: 60%; animation-delay: 1.5s; animation-duration: 6.5s; }
+.starry.windorv .shooting-star:nth-child(6) { top: 25%; left: 80%; animation-delay: 2.5s; animation-duration: 7s; }
+.starry.windorv .shooting-star:nth-child(7) { top: 40%; left: 70%; animation-delay: 0.8s; animation-duration: 6.2s; }
+.starry.windorv .shooting-star:nth-child(8) { top: 10%; left: 80%; animation-delay: 1.2s; animation-duration: 5.8s; }
 
+/* Twinkle star positions */
+.starry.windorv .twinkle-star:nth-child(1) { top: 5%; left: 10%; animation-delay: 0s; }
+.starry.windorv .twinkle-star:nth-child(2) { top: 15%; left: 70%; animation-delay: 0.5s; }
+.starry.windorv .twinkle-star:nth-child(3) { top: 35%; left: 40%; animation-delay: 1s; }
+.starry.windorv .twinkle-star:nth-child(4) { top: 55%; left: 85%; animation-delay: 1.5s; }
+.starry.windorv .twinkle-star:nth-child(5) { top: 75%; left: 20%; animation-delay: 2s; }
+.starry.windorv .twinkle-star:nth-child(6) { top: 85%; left: 60%; animation-delay: 2.5s; }
+.starry.windorv .twinkle-star:nth-child(7) { top: 45%; left: 15%; animation-delay: 3s; }
+.starry.windorv .twinkle-star:nth-child(8) { top: 25%; left: 35%; animation-delay: 3.5s; }
 
 /* ---------------------------------------------------- */
-/*                  CONTENT LAYER                       */
+/*                   LASTWIN WINDOW                     */
 /* ---------------------------------------------------- */
-
-.starry.lastwin {
+.starry.windorv.lastwin {
   position: relative;
   z-index: 5;
   color: #eaf8ff;
   text-shadow: 0 0 6px #7aa2ff;
+  padding: 15px;
 }
 
+/* Nebula border for lastwin */
+.starry.windorv.lastwin::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 15px solid transparent;
+  border-image: linear-gradient(45deg, rgba(130,70,200,0.35), rgba(50,120,220,0.35)) 1;
+  border-radius: 30px 15px;
+  box-shadow: 0 0 30px 10px rgba(130,70,200,0.25) inset,
+              0 0 30px 10px rgba(50,120,220,0.25) inset;
+  animation: nebulaGlow 18s ease-in-out infinite;
+  z-index: 1;
+}
 
-/* ---------------------------------------------------- */
-/*      ORV-STYLE OUTER AND INNER BARS                  */
-/* ---------------------------------------------------- */
+/* Window buttons top right */
+.window-buttons {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 1.2em;
+  z-index: 6;
+}
 
-.starry .outer {
+/* Headers centered */
+.starry.windorv.lastwin .header {
+  text-align: center;
+  margin: 5px 0;
+}
+
+/* Scenario inner text color */
+.starry.windorv.lastwin .inner p {
+  color: #c8e6ff;
+  text-shadow: 0 0 3px #7aa2ff;
+}
+
+/* ORV-style outer and inner bars */
+.starry.windorv .outer {
   background:
     linear-gradient(225deg, transparent 10px, #dfe8ff 10px),
     linear-gradient(135deg, transparent 20px, #dfe8ff 20px);
@@ -468,14 +472,13 @@
   z-index: 5;
 }
 
-.starry .inner {
+.starry.windorv .inner {
   background:
     linear-gradient(225deg, transparent 10px, #233a7a 10px),
     linear-gradient(135deg, transparent 20px, #233a7a 20px);
   color: #eaf4ff;
   z-index: 5;
 }
-
 
 </style>
 
@@ -640,27 +643,50 @@
 
 </br></br></br>
 
-<div class="starry windorv"><div class="white windorv"><div class="starry windorv"><div class="white windorv"><div class="starry windorv lastwin">
+<div class="starry windorv">  <!-- starry base with effects -->
 
-  <!-- GALAXY SWIRLS -->
+
+
+  <!-- Nested ORV window -->
+  <div class="white windorv">
+    <div class="starry windorv lastwin">
+  <!-- Galaxy swirls & stars -->
   <div class="galaxy-layer"></div>
 
-  <!-- SHOOTING STARS -->
+  <div class="twinkle-star"></div>
+  <div class="twinkle-star"></div>
+  <div class="twinkle-star"></div>
+  <div class="twinkle-star"></div>
+  <div class="twinkle-star"></div>
+
   <div class="shooting-star"></div>
   <div class="shooting-star"></div>
-  
-  <div class="scenario outer"><div class="scenario inner">
-    <p>Constellation Scenario</p>
-  </div></div>
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
+      <!-- Minimize / Maximize / Close buttons -->
+      <div class="window-buttons">— ❐ ✖</div>
 
-  <p class="header">[Under the Boundless Sky]</p>
-  <p class="header">Your message here, drifting beneath a galaxy of stars.</p>
-  
-  	<p>Category: Main<br />
-	Difficulty: F<br />
-	Time limit: 30 minutes<br />
-	Reward: 300 coins<br />
-	Penalty for failure: Death</p>
+      <!-- Scenario type -->
+      <div class="scenario outer">
+        <div class="scenario inner">
+          <p>Main Scenario #1</p>
+        </div>
+      </div>
 
-</div></div></div></div></div>
+      <!-- Headers -->
+      <p class="header">[Proof of Value]</p>
+      <p class="header">Kill one or more living organisms.</p>
+
+      <!-- Details -->
+      <p>
+        Category: Main<br />
+        Difficulty: F<br />
+        Time limit: 30 minutes<br />
+        Reward: 300 coins<br />
+        Penalty for failure: Death
+      </p>
+
+    </div>
+  </div>
+</div>
 
